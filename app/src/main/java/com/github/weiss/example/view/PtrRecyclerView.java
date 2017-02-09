@@ -17,6 +17,7 @@ import com.github.weiss.core.entity.HttpResult;
 import com.github.weiss.core.utils.helper.RxException;
 import com.github.weiss.example.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * Created by Weiss on 2017/1/17.
  */
 
-public class PtrRecyclerView<T extends BaseListEntity> extends LinearLayout {
+public class PtrRecyclerView extends LinearLayout {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -45,6 +46,7 @@ public class PtrRecyclerView<T extends BaseListEntity> extends LinearLayout {
     private Context context;
     private MultiTypeAdapter adapter;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    List<BaseListEntity> listResult = new ArrayList<>();
     private BaseListEntity model;
     private int page = 1;
     private Map<String, String> param = new HashMap<>();
@@ -112,6 +114,29 @@ public class PtrRecyclerView<T extends BaseListEntity> extends LinearLayout {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addOnScrollListener(new OnRcvScrollListener() {
+            @Override
+            public void onScrollUp() {
+
+            }
+
+            @Override
+            public void onScrollDown() {
+
+            }
+
+            @Override
+            public void onBottom() {
+                page++;
+                request();
+            }
+
+            @Override
+            public void onScrolled(int distanceX, int distanceY) {
+
+            }
+
+        });
     }
 
     public void setLayoutManager(RecyclerView.LayoutManager layout) {
@@ -121,20 +146,9 @@ public class PtrRecyclerView<T extends BaseListEntity> extends LinearLayout {
 
     public void setAdapter(MultiTypeAdapter adapter, BaseListEntity cls) {
         this.adapter = adapter;
-        initAdapter();
         recyclerView.setAdapter(adapter);
-        model=cls;
+        model = cls;
         ptrFrame.autoRefresh();
-    }
-
-    private void initAdapter() {
-
-    }
-
-    public void onLoadMoreRequested() {
-        ptrFrame.setEnabled(false);
-        page++;
-        request();
     }
 
     private void request() {
@@ -151,10 +165,17 @@ public class PtrRecyclerView<T extends BaseListEntity> extends LinearLayout {
 
                     }
                 })
-                .subscribe(new Consumer<HttpResult<List<T>>>() {
+                .subscribe(new Consumer<HttpResult<List<BaseListEntity>>>() {
                                @Override
-                               public void accept(HttpResult<List<T>> httpListResult) throws Exception {
-                                   adapter.setItems(httpListResult.results);
+                               public void accept(HttpResult<List<BaseListEntity>> httpListResult) throws Exception {
+                                   if (page == 1) {
+                                       listResult.clear();
+                                       listResult = httpListResult.results;
+                                       adapter.setItems(httpListResult.results);
+                                   } else {
+                                       listResult.addAll(httpListResult.results);
+                                   }
+                                   adapter.setItems(listResult);
                                    adapter.notifyDataSetChanged();
                                }
                            },

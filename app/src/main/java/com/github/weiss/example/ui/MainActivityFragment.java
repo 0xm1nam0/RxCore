@@ -16,7 +16,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
  */
 public class MainActivityFragment extends BaseRxFragment {
     @BindView(R.id.baseRecyclerView)
-    PtrRecyclerView<Gank> baseRecyclerView;
+    PtrRecyclerView ptrRecyclerView;
 
     private MultiTypeAdapter adapter;
 
@@ -31,10 +31,10 @@ public class MainActivityFragment extends BaseRxFragment {
 
     @Override
     protected void initView() {
-        baseRecyclerView.setParam("gank","Android");
-        baseRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        ptrRecyclerView.setParam("gank","Android");
+        ptrRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         adapter = new MultiTypeAdapter();
         adapter.register(Gank.class,new GankViewProvider());
-        baseRecyclerView.setAdapter(adapter,new Gank());
+        ptrRecyclerView.setAdapter(adapter,new Gank());
     }
 }
