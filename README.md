@@ -2,6 +2,8 @@
 简书地址
 [RxJava2 + Retrofit2 优雅简洁封装](http://www.jianshu.com/p/4005bc4a20f2)
 
+![RxJava2 + Retrofit2.jpg](http://upload-images.jianshu.io/upload_images/1877748-0f6f35b0667d7ba0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ###封装方案
 ######1、封装 Rx 线程相关
 **RxSchedulersHelper：**
