@@ -5,18 +5,22 @@ buildscript {
         jcenter()
         mavenCentral()
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
 
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0-beta3'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
+
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
@@ -31,8 +35,8 @@ ext {
     releaseVersionName = '1.0.0'
 
     androidCompileSdkVersion = 25
-    androidBuildToolsVersion = '25.0.1'
-    androidSupportSdkVersion = '25.0.1'
+    androidBuildToolsVersion = '25.1.0'
+    androidSupportSdkVersion = '25.1.0'
     minSdkVersion = 16
     targetSdkVersion = 24
 
@@ -41,4 +45,5 @@ ext {
     rxjava2Version = '2.0.2'
     retrofit2Version = '2.1.0'
     gsonVersion = '2.6.2'
+    butterknifeVersion = '8.4.0'
 }

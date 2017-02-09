@@ -1,8 +1,17 @@
 apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+
+// Java8 not fully supported in library projects yet, https://code.google.com/p/android/issues/detail?id=211386
+// this is a temporary workaround to get at least lambdas compiling
+/*gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xbootclasspath/a:" + System.properties.get("java.home") + "/lib/rt.jar"
+    }
+}*/
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         minSdkVersion 17
@@ -32,8 +41,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     compile "com.android.support:appcompat-v7:$rootProject.ext.androidSupportSdkVersion"

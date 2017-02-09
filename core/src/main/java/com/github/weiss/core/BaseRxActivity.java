@@ -5,25 +5,23 @@ import android.os.Bundle;
 import com.github.weiss.core.entity.HttpResult;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
  * 管理RxJava生命周期，避免内存泄漏
- * <p>
+ * RxJava处理服务器返回
+ *
  * Created by Weiss on 2016/12/23.
  */
 
-public abstract class BaseRxActivity extends BaseActivity {
+public abstract class BaseRxActivity extends BaseCoreActivity {
 
     private CompositeDisposable disposables2Stop;// 管理Stop取消订阅者者
     private CompositeDisposable disposables2Destroy;// 管理Destroy取消订阅者者
 
     protected abstract int getLayoutId();
-
-    protected abstract boolean isLogin();
 
     protected abstract void initView();
 
@@ -34,29 +32,20 @@ public abstract class BaseRxActivity extends BaseActivity {
      * @return
      */
     public <T> ObservableTransformer<HttpResult<T>, T> handleResult() {
-        return new ObservableTransformer<HttpResult<T>, T>() {
-            /**
-             * Applies a function to the upstream Observable and returns an ObservableSource with
-             * optionally different element type.
-             *
-             * @param upstream the upstream Observable instance
-             * @return the transformed ObservableSource instance
-             */
-            @Override
-            public ObservableSource<T> apply(Observable<HttpResult<T>> upstream) {
+        return upstream ->{
                 return upstream.flatMap(result -> {
                             if (result.isSuccess()) {
-                                return createData(result.getResult());
+                                return createData(result.results);
                             } else if (result.isTokenInvalid()) {
-//                                tokenInvalid();
+                                //处理token时效
+//                               tokenInvalid();
                             } else {
-                                return Observable.error(new Exception(result.getResult_msg()));
+                                return Observable.error(new Exception(result.msg));
                             }
                             return Observable.empty();
                         }
 
                 );
-            }
         };
     }
 

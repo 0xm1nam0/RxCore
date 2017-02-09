@@ -5,48 +5,34 @@ package com.github.weiss.core.entity;
  */
 
 public class HttpResult<T> extends BaseEntity.BaseBean {
-    public String resultCode;
-    public String resultMsg;
+    public String code;
+    public String msg;
     public boolean hasmore;
-    public T result;
+    public T results;
+    public boolean error;
 
     public static String SUCCESS = "000";
     public static String SIGN_OUT = "101";//token验证失败
+    public static String SHOW_TOAST = "102";//显示Toast
+
+//    public boolean isSuccess() {
+//        return SUCCESS.equals(code);
+//    }
 
     public boolean isSuccess() {
-        return SUCCESS.equals(resultCode);
+        return !error;
     }
 
-
     public boolean isTokenInvalid() {
-        return SIGN_OUT.equals(resultCode);
+        return SIGN_OUT.equals(code);
+    }
+
+    public boolean isShowToast() {
+        return SHOW_TOAST.equals(code);
     }
 
     public boolean hasMore() {
         return hasmore;
     }
 
-    public String getResultcode() {
-        return resultCode;
-    }
-
-    public void setResultcode(String resultCode) {
-        this.resultCode = resultCode;
-    }
-
-    public String getResult_msg() {
-        return resultMsg;
-    }
-
-    public void setResult_msg(String resultMsg) {
-        this.resultMsg = resultMsg;
-    }
-
-    public T getResult() {
-        return result;
-    }
-
-    public void setResult(T result) {
-        this.result = result;
-    }
 }

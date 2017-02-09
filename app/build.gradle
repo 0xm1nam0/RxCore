@@ -1,22 +1,28 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.github.weiss.example"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11 -frtti -fexceptions"
             }
         }
+/*        jackOptions {
+            enabled true
+        }
+        useJack(true)*/
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,6 +34,11 @@ android {
             path "CMakeLists.txt"
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -35,9 +46,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
-    compile 'com.android.support:design:25.0.1'
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+    compile 'com.tencent.bugly:crashreport:2.4.0'
     testCompile 'junit:junit:4.12'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile 'me.drakeet.multitype:multitype:2.4.1'
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.androidSupportSdkVersion"
+    compile "com.android.support:cardview-v7:$rootProject.ext.androidSupportSdkVersion"
+    compile 'com.github.chrisbanes.photoview:library:1.2.3'
     compile project(':core')
 }
