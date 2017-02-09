@@ -237,6 +237,7 @@ public class RxException<T extends Throwable> implements Consumer<T> {
     }
 }
 ```
+
 **封装后 (BaseRxActivity的子类使用)：**
 ```
 addRxDestroy(Api.getInstance().movieService
@@ -300,4 +301,5 @@ PtrRecyclerView目前只是简单实现下拉刷新和上拉加载，有空会�
 
 ######相关链接
 [RxJava 2.0有什么不同(译)](http://blog.csdn.net/qq_35064774/article/details/53045298)
+
 [探索专为 Android 而设计的 RxJava 2](https://realm.io/cn/news/gotocph-jake-wharton-exploring-rxjava2-android/)
