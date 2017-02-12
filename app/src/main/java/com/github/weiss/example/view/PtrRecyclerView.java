@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.github.weiss.core.BaseRxActivity;
 import com.github.weiss.core.entity.BaseListEntity;
-import com.github.weiss.core.entity.HttpResult;
 import com.github.weiss.core.utils.helper.RxException;
 import com.github.weiss.example.R;
 
@@ -165,15 +165,15 @@ public class PtrRecyclerView extends LinearLayout {
 
                     }
                 })
-                .subscribe(new Consumer<HttpResult<List<BaseListEntity>>>() {
+                .compose(((BaseRxActivity)getContext()).handleResult())
+                .subscribe(new Consumer<List<BaseListEntity>>() {
                                @Override
-                               public void accept(HttpResult<List<BaseListEntity>> httpListResult) throws Exception {
+                               public void accept(List<BaseListEntity> results) throws Exception {
                                    if (page == 1) {
                                        listResult.clear();
-                                       listResult = httpListResult.results;
-                                       adapter.setItems(httpListResult.results);
+                                       listResult = results;
                                    } else {
-                                       listResult.addAll(httpListResult.results);
+                                       listResult.addAll(results);
                                    }
                                    adapter.setItems(listResult);
                                    adapter.notifyDataSetChanged();

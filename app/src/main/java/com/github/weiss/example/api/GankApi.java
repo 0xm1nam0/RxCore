@@ -1,7 +1,7 @@
 package com.github.weiss.example.api;
 
 
-import com.github.weiss.core.utils.LogUtils2;
+import com.github.weiss.core.utils.LogUtils;
 import com.github.weiss.core.utils.NetworkUtils;
 import com.github.weiss.example.App;
 import com.google.gson.Gson;
@@ -81,7 +81,7 @@ public class GankApi {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
                         .build();
-                LogUtils2.d("Okhttp", "no network");
+                LogUtils.d("Okhttp", "no network");
             }
 
             Response originalResponse = chain.proceed(request);

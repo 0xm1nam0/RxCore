@@ -3,7 +3,7 @@ package com.github.weiss.core.entity;
 import java.io.Serializable;
 import java.util.Map;
 
-import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 
 public interface BaseEntity {
@@ -13,7 +13,7 @@ public interface BaseEntity {
 
     interface IListBean {
         //获取第几页
-        Flowable getPage(int page);
+        Observable getPage(int page);
         //设置网络请求参数
         void setParam(Map<String, String> param);
     }

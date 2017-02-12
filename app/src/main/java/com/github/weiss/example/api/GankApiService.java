@@ -26,6 +26,7 @@ import com.github.weiss.example.entity.Gank;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -39,8 +40,8 @@ public interface GankApiService {
     Flowable<HttpResult<List<Gank>>> getRandMeizhiData();
 
     @GET("data/{gank}/10/{page}")
-    Flowable<HttpResult<List<Gank>>> getGankData(@Path("gank") String gank,
-                                                 @Path("page") int page);
+    Observable<HttpResult<List<Gank>>> getGankData(@Path("gank") String gank,
+                                                   @Path("page") int page);
 
     @GET("search/query/{query}/category/{category}/count/10/page/{page}")
     Flowable<HttpResult<List<Gank>>> getSearch(@Path("query") String query, @Path("category") String category,

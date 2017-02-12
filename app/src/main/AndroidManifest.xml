@@ -29,6 +29,10 @@
 
         <activity
             android:name="com.github.weiss.example.ui.PictureActivity" />
+        <activity
+            android:name="com.github.weiss.example.ui.WebActivity" />
+        <activity
+            android:name="com.github.weiss.example.ui.GankDetailsActivity" />
     </application>
 
 </manifest>

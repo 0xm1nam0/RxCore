@@ -19,6 +19,7 @@ public class MainActivityFragment extends BaseRxFragment {
     PtrRecyclerView ptrRecyclerView;
 
     private MultiTypeAdapter adapter;
+    private String type;
 
     public MainActivityFragment() {
     }
@@ -31,10 +32,11 @@ public class MainActivityFragment extends BaseRxFragment {
 
     @Override
     protected void initView() {
-        ptrRecyclerView.setParam("gank","Android");
+        type = "Android";
+        ptrRecyclerView.setParam("gank", type);
         ptrRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         adapter = new MultiTypeAdapter();
-        adapter.register(Gank.class,new GankViewProvider());
-        ptrRecyclerView.setAdapter(adapter,new Gank());
+        adapter.register(Gank.class, new GankViewProvider(type));
+        ptrRecyclerView.setAdapter(adapter, new Gank());
     }
 }

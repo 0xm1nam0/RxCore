@@ -9,7 +9,7 @@ import com.github.weiss.example.api.GankApi;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 
 /**
@@ -41,7 +41,7 @@ public class Gank extends BaseListEntity {
     public List<String> images;
 
     @Override
-    public Flowable<HttpResult<List<Gank>>> getPage(int page) {
+    public Observable<HttpResult<List<Gank>>> getPage(int page) {
         return GankApi.getInstance().service.getGankData(param.get("gank"), page)
                 .zipWith(GankApi.getInstance().service.getGankData("福利", page),
                         (BiFunction<HttpResult<List<Gank>>, HttpResult<List<Gank>>, HttpResult<List<Gank>>>) (listHttpResult, listHttpResult2) -> {
