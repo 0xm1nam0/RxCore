@@ -2,7 +2,7 @@
 简书地址
 [RxJava2 + Retrofit2 优雅简洁封装](http://www.jianshu.com/p/4005bc4a20f2)
 
-![RxJava2 + Retrofit2.jpg](https://github.com/WeissWill/Core/tree/master/screenshot/core.jpg)
+![RxJava2 + Retrofit2.jpg](https://github.com/WeissWill/Core/raw/master/screenshot/core.jpg)
 
 ###封装方案
 ######1、封装 Rx 线程相关
