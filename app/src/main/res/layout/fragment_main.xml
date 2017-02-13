@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.github.weiss.example.view.PtrRecyclerView
+    <com.github.weiss.core.view.PtrRecyclerView
         android:id="@+id/baseRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

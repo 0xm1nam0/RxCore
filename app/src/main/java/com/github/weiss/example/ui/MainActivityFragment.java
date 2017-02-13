@@ -6,7 +6,7 @@ import com.github.weiss.core.BaseRxFragment;
 import com.github.weiss.example.R;
 import com.github.weiss.example.adapter.GankViewProvider;
 import com.github.weiss.example.entity.Gank;
-import com.github.weiss.example.view.PtrRecyclerView;
+import com.github.weiss.core.view.PtrRecyclerView;
 
 import butterknife.BindView;
 import me.drakeet.multitype.MultiTypeAdapter;

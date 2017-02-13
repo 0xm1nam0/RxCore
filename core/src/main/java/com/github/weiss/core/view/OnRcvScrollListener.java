@@ -1,4 +1,4 @@
-package com.github.weiss.example.view;
+package com.github.weiss.core.view;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;

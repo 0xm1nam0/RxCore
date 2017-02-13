@@ -1,7 +1,9 @@
-package com.github.weiss.example.view;
+package com.github.weiss.core.view;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,17 +15,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.github.weiss.core.BaseRxActivity;
+import com.github.weiss.core.R;
 import com.github.weiss.core.entity.BaseListEntity;
 import com.github.weiss.core.utils.helper.RxException;
-import com.github.weiss.example.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -38,9 +38,9 @@ import me.drakeet.multitype.MultiTypeAdapter;
 
 public class PtrRecyclerView extends LinearLayout {
 
-    @BindView(R.id.recyclerView)
+    //    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @BindView(R.id.store_house_ptr_frame)
+    //    @BindView(R.id.store_house_ptr_frame)
     PtrClassicFrameLayout ptrFrame;
 
     private Context context;
@@ -66,6 +66,7 @@ public class PtrRecyclerView extends LinearLayout {
         init(context);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public PtrRecyclerView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context);
@@ -90,9 +91,9 @@ public class PtrRecyclerView extends LinearLayout {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         addView(layout);
-        ButterKnife.bind(this, layout);
-//        recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerView);
-//        ptrFrame = (PtrFrameLayout) layout.findViewById(R.id.store_house_ptr_frame);
+        recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerView);
+        ptrFrame = (PtrClassicFrameLayout) layout.findViewById(R.id.store_house_ptr_frame);
+//        ButterKnife.bind(this, layout);
         initView(context);
     }
 
@@ -144,10 +145,10 @@ public class PtrRecyclerView extends LinearLayout {
     }
 
 
-    public void setAdapter(MultiTypeAdapter adapter, BaseListEntity cls) {
+    public void setAdapter(MultiTypeAdapter adapter, BaseListEntity model) {
         this.adapter = adapter;
         recyclerView.setAdapter(adapter);
-        model = cls;
+        this.model = model;
         ptrFrame.autoRefresh();
     }
 
@@ -165,7 +166,7 @@ public class PtrRecyclerView extends LinearLayout {
 
                     }
                 })
-                .compose(((BaseRxActivity)getContext()).handleResult())
+                .compose(((BaseRxActivity) getContext()).handleResult())
                 .subscribe(new Consumer<List<BaseListEntity>>() {
                                @Override
                                public void accept(List<BaseListEntity> results) throws Exception {
