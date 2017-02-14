@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.github.weiss.core.BaseCoreActivity;
 import com.github.weiss.core.BaseRxActivity;
 import com.github.weiss.core.R;
 import com.github.weiss.core.entity.BaseListEntity;
@@ -157,16 +158,20 @@ public class PtrRecyclerView extends LinearLayout {
             Log.e("model", "null");
             return;
         }
+        if (page != 1) {
+            //演示等待对话框用法，加载更多不推荐这样使用
+            ((BaseCoreActivity) getContext()).showProgress("正在加载更多");
+        }
         model.setParam(param);
         compositeDisposable.add(model.getPage(page)
+                .compose(((BaseRxActivity) getContext()).handleResult())
                 .doAfterTerminate(() -> {
                     if (page == 1) {
                         ptrFrame.refreshComplete();
                     } else {
-
+                        ((BaseCoreActivity) getContext()).dismissProgress();
                     }
                 })
-                .compose(((BaseRxActivity) getContext()).handleResult())
                 .subscribe(new Consumer<List<BaseListEntity>>() {
                                @Override
                                public void accept(List<BaseListEntity> results) throws Exception {

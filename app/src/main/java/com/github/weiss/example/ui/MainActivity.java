@@ -1,9 +1,7 @@
 package com.github.weiss.example.ui;
 
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +20,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Example of a call to a native method
+        toolbar.setTitle(stringFromJNI());
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -32,9 +32,6 @@ public class MainActivity extends BaseActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        // Example of a call to a native method
-        toolbar.setTitle("hello");
     }
 
     @Override

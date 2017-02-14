@@ -20,16 +20,24 @@ public abstract class BaseCoreActivity extends AppCompatActivity{
         setContentView(this.getLayoutId());
         ButterKnife.bind(this);
         progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         initView();
     }
 
-    public void ShowToast(String msg){
+    public void showToast(String msg){
         ToastUtils.show(msg);
     }
 
-    public void ShowProgress(String msg){
+    public void showProgress(String msg){
         progressDialog.setTitle(msg);
         progressDialog.show();
+    }
+
+    public void dismissProgress(){
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     protected abstract int getLayoutId();
