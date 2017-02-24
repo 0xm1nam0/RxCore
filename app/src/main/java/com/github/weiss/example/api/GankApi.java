@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GankApi {
 
     public static final String BASE_URL = "http://gank.io/api/";
-    public static final int DEFAULT_TIMEOUT = 5;
+    public static final int DEFAULT_TIMEOUT = 7676;
 
     public Retrofit retrofit;
     public GankApiService service;
@@ -41,9 +41,8 @@ public class GankApi {
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(7676, TimeUnit.MILLISECONDS)
-                .connectTimeout(7676, TimeUnit.MILLISECONDS)
-//                .addInterceptor(mInterceptor)
+                .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
+                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .addInterceptor(interceptor)
                 .addNetworkInterceptor(new HttpCacheInterceptor())
                 .cache(cache)

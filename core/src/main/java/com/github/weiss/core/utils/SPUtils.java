@@ -33,7 +33,7 @@ public class SPUtils {
      * @return
      */
     private static SharedPreferences getSharedPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(AppContext);
+        return SafeSharedPreferences.wrap(PreferenceManager.getDefaultSharedPreferences(AppContext));
     }
 
     /**
@@ -50,7 +50,7 @@ public class SPUtils {
         if (TextUtils.isEmpty(name)) {
             sharedPreferences = getSharedPreferences();
         } else {
-            sharedPreferences = AppContext.getSharedPreferences(name, Context.MODE_PRIVATE);
+            sharedPreferences = SafeSharedPreferences.wrap(AppContext.getSharedPreferences(name, Context.MODE_PRIVATE));
         }
         return sharedPreferences;
     }

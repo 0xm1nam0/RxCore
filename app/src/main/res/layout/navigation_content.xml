@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/id_uc_news_header_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:orientation="vertical"
+        app:layout_behavior="@string/behavior_uc_header_pager">
+
+<!--        <com.ui.banner.SimpleImageBanner
+            android:id="@+id/image_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:bb_barColor="#88000000"
+            app:bb_barPaddingBottom="5dp"
+            app:bb_barPaddingLeft="10dp"
+            app:bb_barPaddingRight="10dp"
+            app:bb_barPaddingTop="5dp"
+            app:bb_delay="2"
+            app:bb_indicatorCornerRadius="3dp"
+            app:bb_indicatorGap="8dp"
+            app:bb_indicatorGravity="RIGHT"
+            app:bb_indicatorHeight="6dp"
+            app:bb_indicatorSelectColor="#ffffff"
+            app:bb_indicatorStyle="CORNER_RECTANGLE"
+            app:bb_indicatorUnselectColor="#88ffffff"
+            app:bb_indicatorWidth="6dp"
+            app:bb_isAutoScrollEnable="true"
+            app:bb_isBarShowWhenLast="true"
+            app:bb_isIndicatorShow="true"
+            app:bb_isLoopEnable="true"
+            app:bb_isTitleShow="true"
+            app:bb_period="10"
+            app:bb_scale="0.5625"
+            app:bb_textColor="#ffffff"
+            app:bb_textSize="13.5sp"
+            />-->
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uc_news_header_title_init_offset"
+        android:background="?attr/colorPrimary"
+        android:orientation="vertical"
+        app:layout_behavior="@string/behavior_uc_title">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        </android.support.design.widget.AppBarLayout>
+    </FrameLayout>
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uc_news_tabs_height"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_behavior="@string/behavior_uc_news_tab"
+        app:tabGravity="fill"
+        app:tabMode="scrollable"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/window_background"
+        app:layout_behavior="@string/behavior_contents"/>
+<!--
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_done"/>-->
+
+</android.support.design.widget.CoordinatorLayout>

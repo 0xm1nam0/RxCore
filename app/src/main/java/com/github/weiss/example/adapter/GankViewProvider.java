@@ -26,8 +26,7 @@ import me.drakeet.multitype.ItemViewProvider;
 /**
  * Created by Weiss on 2017/2/8.
  */
-public class GankViewProvider
-        extends ItemViewProvider<Gank, GankViewProvider.ViewHolder> {
+public class GankViewProvider extends ItemViewProvider<Gank, GankViewProvider.ViewHolder> {
 
     private String type;
 

@@ -2,15 +2,20 @@ package com.github.weiss.example.ui;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.weiss.core.utils.SPUtils;
+import com.github.weiss.core.utils.ToastUtils;
 import com.github.weiss.example.BaseActivity;
 import com.github.weiss.example.R;
 
 public class MainActivity extends BaseActivity {
+    private MainActivityFragment fragment;
 
     @Override
     protected int getLayoutId() {
@@ -32,6 +37,12 @@ public class MainActivity extends BaseActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        fragment = MainActivityFragment.newInstance("Android");
+        transaction.replace(R.id.fragment, fragment);
+        transaction.commit();
     }
 
     @Override

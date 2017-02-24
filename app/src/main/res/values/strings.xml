@@ -4,4 +4,10 @@
     <string name="doit">DOIT</string>
     <string name="ask_saving_picture">是否保存图片？</string>
     <string name="load_more">正在加载更多...</string>
+    <string name="search">搜索</string>
+
+    <string name="behavior_contents">com.view.behavior.uc.UcNewsContentBehavior</string>
+    <string name="behavior_uc_header_pager">com.view.behavior.uc.UcNewsHeaderPagerBehavior</string>
+    <string name="behavior_uc_title">com.view.behavior.uc.UcNewsTitleBehavior</string>
+    <string name="behavior_uc_news_tab">com.view.behavior.uc.UcNewsTabBehavior</string>
 </resources>

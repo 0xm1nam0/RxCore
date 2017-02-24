@@ -8,7 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import com.github.weiss.core.BaseCoreActivity;
 import com.github.weiss.core.BaseRxActivity;
 import com.github.weiss.core.R;
 import com.github.weiss.core.entity.BaseListEntity;
+import com.github.weiss.core.utils.LogUtils;
 import com.github.weiss.core.utils.helper.RxException;
 
 import java.util.ArrayList;
@@ -34,6 +34,7 @@ import io.reactivex.functions.Consumer;
 import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
+ *
  * Created by Weiss on 2017/1/17.
  */
 
@@ -145,6 +146,9 @@ public class PtrRecyclerView extends LinearLayout {
         recyclerView.setLayoutManager(layout);
     }
 
+    public void addOnScrollListener(RecyclerView.OnScrollListener onScrollListener) {
+        recyclerView.addOnScrollListener(onScrollListener);
+    }
 
     public void setAdapter(MultiTypeAdapter adapter, BaseListEntity model) {
         this.adapter = adapter;
@@ -155,7 +159,7 @@ public class PtrRecyclerView extends LinearLayout {
 
     private void request() {
         if (model == null) {
-            Log.e("model", "null");
+            LogUtils.e("model", "null");
             return;
         }
         if (page != 1) {
