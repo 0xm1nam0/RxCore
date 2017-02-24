@@ -297,7 +297,7 @@ public class MainActivityFragment extends BaseRxFragment {
 只需要写一个适配器和实体类，轻松实现多页请求，PtrRecyclerView下拉刷新和上拉加载自动获取数据。
 PtrRecyclerView目前只是简单实现下拉刷新和上拉加载，有空会完善，当然例子也会完善。
 ###后记
-还可以封装网络加载对话框，这个看个人喜好，同样以上封装同样可以看个人喜好和项目需求自由组装。
+还可以封装网络加载对话框，这个看个人喜好，同样以上封装同样可以看个人喜好和项目需求自由组装。未来会开放MVP版本。
 
 ######相关链接
 [RxJava 2.0有什么不同(译)](http://blog.csdn.net/qq_35064774/article/details/53045298)
