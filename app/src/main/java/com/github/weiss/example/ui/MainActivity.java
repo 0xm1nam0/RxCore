@@ -9,8 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.github.weiss.core.utils.SPUtils;
-import com.github.weiss.core.utils.ToastUtils;
 import com.github.weiss.example.BaseActivity;
 import com.github.weiss.example.R;
 
@@ -26,7 +24,7 @@ public class MainActivity extends BaseActivity {
     protected void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // Example of a call to a native method
-        toolbar.setTitle(stringFromJNI());
+        toolbar.setTitle("RxCore");
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -65,17 +63,6 @@ public class MainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
-
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib");
     }
 
 }
