@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0-rc1'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
         classpath 'me.tatarka:gradle-retrolambda:3.5.0'
@@ -42,8 +42,8 @@ ext {
 
     junitVersion = '4.12'
 
-    rxjava2Version = '2.0.2'
-    retrofit2Version = '2.1.0'
+    rxjava2Version = '2.0.8'
+    retrofit2Version = '2.2.0'
     gsonVersion = '2.6.2'
     butterknifeVersion = '8.4.0'
 }

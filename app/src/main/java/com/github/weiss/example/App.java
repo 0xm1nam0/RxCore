@@ -1,7 +1,7 @@
 package com.github.weiss.example;
 
 import com.github.weiss.core.BaseApp;
-import com.tencent.bugly.crashreport.CrashReport;
+import com.squareup.leakcanary.LeakCanary;
 
 import butterknife.ButterKnife;
 
@@ -14,6 +14,12 @@ public class App extends BaseApp {
     public void onCreate() {
         super.onCreate();
         ButterKnife.setDebug(true);
-        CrashReport.initCrashReport(getApplicationContext(), "7f7492a815", false);
+//        CrashReport.initCrashReport(getApplicationContext(), "", false);
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 }
