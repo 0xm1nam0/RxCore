@@ -6,7 +6,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.github.weiss.example.ui.PictureActivity;
 import com.github.weiss.example.view.RatioImageView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import me.drakeet.multitype.ItemViewProvider;
 
 /**
@@ -86,7 +84,7 @@ public class GankViewProvider extends ItemViewProvider<Gank, GankViewProvider.Vi
     }
 
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends ButterKnifeViewHolder {
         @BindView(R.id.title)
         TextView title;
         @BindView(R.id.image)
@@ -94,7 +92,6 @@ public class GankViewProvider extends ItemViewProvider<Gank, GankViewProvider.Vi
 
         ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
         }
     }
 }

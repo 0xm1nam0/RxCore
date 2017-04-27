@@ -39,7 +39,7 @@ public class GankApi {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         File cacheFile = new File(App.getAppContext().getCacheDir(), "cache");
-        Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
+        Cache cache = new Cache(cacheFile, 1024 * 1024 * 20); //20Mb
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)

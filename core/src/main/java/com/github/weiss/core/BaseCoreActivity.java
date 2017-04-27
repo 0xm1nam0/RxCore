@@ -30,7 +30,7 @@ public abstract class BaseCoreActivity extends AppCompatActivity{
     }
 
     public void showProgress(String msg){
-        progressDialog.setTitle(msg);
+        progressDialog.setMessage(msg);
         progressDialog.show();
     }
 
