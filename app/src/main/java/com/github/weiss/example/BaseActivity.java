@@ -8,10 +8,6 @@ import com.github.weiss.core.BaseRxActivity;
 
 public abstract class BaseActivity extends BaseRxActivity {
 
-    protected abstract int getLayoutId();
-
-    protected abstract void initView();
-
     //token失效处理
     public void tokenInvalid( ){
 
