@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.github.weiss.core.BaseRxActivity;
 import com.github.weiss.core.utils.ClipboardUtils;
 import com.github.weiss.core.utils.ImageLoaderUtil;
+import com.github.weiss.example.BaseActivity;
 import com.github.weiss.example.R;
 import com.github.weiss.example.util.JsHandler;
 import com.github.weiss.example.util.SnackbarUtil;
@@ -37,7 +37,7 @@ import butterknife.BindView;
  * to true makes it work because then the ScrollView is being faded in.
  * The ScrollView has a maximum size, while its contents can be enormous.
  */
-public class GankDetailsActivity extends BaseRxActivity {
+public class GankDetailsActivity extends BaseActivity {
 
 /*    @Bind(R.id.circle_progress)
     CircleProgressView mCircleProgressView;*/

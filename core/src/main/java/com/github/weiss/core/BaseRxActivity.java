@@ -25,6 +25,8 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
 
     protected abstract void initView();
 
+    protected abstract boolean needHandleResult(HttpResult result);
+
     /**
      * Rx优雅处理服务器返回
      *
@@ -36,10 +38,7 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
             return upstream.flatMap(result -> {
                         if (result.isSuccess()) {
                             return createData(result.results);
-                        } else if (result.isTokenInvalid()) {
-                            //处理token时效
-//                               tokenInvalid();
-                        } else {
+                        } else if (!needHandleResult(result)) {
                             return Observable.error(new Exception(result.msg));
                         }
                         return Observable.empty();
