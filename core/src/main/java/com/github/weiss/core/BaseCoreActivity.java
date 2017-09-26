@@ -12,8 +12,9 @@ import butterknife.ButterKnife;
  * Created by Weiss on 2017/1/10.
  */
 
-public abstract class BaseCoreActivity extends AppCompatActivity{
+public abstract class BaseCoreActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,17 +26,17 @@ public abstract class BaseCoreActivity extends AppCompatActivity{
         initView();
     }
 
-    public void showToast(String msg){
+    public void showToast(String msg) {
         ToastUtils.show(msg);
     }
 
-    public void showProgress(String msg){
+    public void showProgress(String msg) {
         progressDialog.setMessage(msg);
         progressDialog.show();
     }
 
-    public void dismissProgress(){
-        if(progressDialog != null) {
+    public void dismissProgress() {
+        if (progressDialog != null) {
             progressDialog.dismiss();
         }
     }

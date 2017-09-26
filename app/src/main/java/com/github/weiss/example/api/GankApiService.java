@@ -45,7 +45,7 @@ public interface GankApiService {
 
     @GET("search/query/{query}/category/{category}/count/10/page/{page}")
     Flowable<HttpResult<List<Gank>>> getSearch(@Path("query") String query, @Path("category") String category,
-                                     @Path("page") int page);
+                                               @Path("page") int page);
 
     @GET("data/福利/10/{page}")
     Flowable<HttpResult<List<Gank>>> getMeizhiList(@Path("page") int page);

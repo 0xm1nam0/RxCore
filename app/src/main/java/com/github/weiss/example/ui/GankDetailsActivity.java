@@ -37,8 +37,7 @@ import butterknife.BindView;
  * to true makes it work because then the ScrollView is being faded in.
  * The ScrollView has a maximum size, while its contents can be enormous.
  */
-public class GankDetailsActivity extends BaseRxActivity
-{
+public class GankDetailsActivity extends BaseRxActivity {
 
 /*    @Bind(R.id.circle_progress)
     CircleProgressView mCircleProgressView;*/
@@ -79,8 +78,7 @@ public class GankDetailsActivity extends BaseRxActivity
 
 
     @Override
-    public int getLayoutId()
-    {
+    public int getLayoutId() {
 
         return R.layout.activity_gank_details;
     }
@@ -91,8 +89,7 @@ public class GankDetailsActivity extends BaseRxActivity
     }*/
 
     @Override
-    public void initView()
-    {
+    public void initView() {
 
         ViewCompat.setTransitionName(mImageView, TRANSIT_PIC);
 
@@ -109,33 +106,28 @@ public class GankDetailsActivity extends BaseRxActivity
         mCommonWebView.loadUrl(url);
     }
 
-    public void initToolBar()
-    {
+    public void initToolBar() {
 
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null)
-        {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(title);
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_web, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         int itemId = item.getItemId();
-        switch (itemId)
-        {
+        switch (itemId) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -155,22 +147,20 @@ public class GankDetailsActivity extends BaseRxActivity
     }
 
     @Override
-    protected void onNewIntent(Intent intent)
-    {
+    protected void onNewIntent(Intent intent) {
 
         super.onNewIntent(intent);
         parseIntent(intent);
     }
 
-    private void parseIntent(Intent intent)
-    {
+    private void parseIntent(Intent intent) {
 
         url = intent.getStringExtra(KEY_URL);
         title = intent.getStringExtra(KEY_TITLE);
         imgUrl = intent.getStringExtra(KEY_IMG);
         user = intent.getStringExtra(KEY_USER);
 //        LogUtils.d(imgUrl);
-        ImageLoaderUtil.loadGifImg(mImageView,imgUrl);
+        ImageLoaderUtil.loadGifImg(mImageView, imgUrl);
 /*        Glide.with(GankDetailsActivity.this)
                 .load(imgUrl)
                 .centerCrop()
@@ -180,21 +170,18 @@ public class GankDetailsActivity extends BaseRxActivity
         mTitle.setText(title);
         mSource.setText("by: " + user);
 
-        if (TextUtils.isEmpty(url))
-        {
+        if (TextUtils.isEmpty(url)) {
             finish();
         }
     }
 
-    private void initWebSetting()
-    {
+    private void initWebSetting() {
 
         JsHandler jsHandler = new JsHandler(this, mCommonWebView);
         mCommonWebView.addJavascriptInterface(jsHandler, "JsHandler");
     }
 
-    public static Intent start(Activity activity, String url, String title, String imgUrl, String user)
-    {
+    public static Intent start(Activity activity, String url, String title, String imgUrl, String user) {
 
         Intent intent = new Intent();
         intent.setClass(activity, GankDetailsActivity.class);
@@ -207,8 +194,7 @@ public class GankDetailsActivity extends BaseRxActivity
         return intent;
     }
 
-    public static boolean start(Activity activity, String url)
-    {
+    public static boolean start(Activity activity, String url) {
 
         Intent intent = new Intent();
         intent.setClass(activity, GankDetailsActivity.class);
@@ -219,16 +205,14 @@ public class GankDetailsActivity extends BaseRxActivity
     }
 
 
-    public void hideProgress()
-    {
+    public void hideProgress() {
 
 /*        mCircleProgressView.setVisibility(View.GONE);
         mCircleProgressView.stopSpinning();*/
     }
 
 
-    private void share()
-    {
+    private void share() {
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");

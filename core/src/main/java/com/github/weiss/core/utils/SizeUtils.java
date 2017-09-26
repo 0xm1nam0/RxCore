@@ -37,7 +37,7 @@ public class SizeUtils {
      * @param pxValue px值
      * @return dp值
      */
-    public static int px2dp( float pxValue) {
+    public static int px2dp(float pxValue) {
         final float scale = Utils.getContext().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
@@ -59,7 +59,7 @@ public class SizeUtils {
      * @param pxValue px值
      * @return sp值
      */
-    public static int px2sp( float pxValue) {
+    public static int px2sp(float pxValue) {
         final float fontScale = Utils.getContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }

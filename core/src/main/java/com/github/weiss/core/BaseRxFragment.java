@@ -30,7 +30,7 @@ public abstract class BaseRxFragment extends BaseFragment {
      * @return
      */
     public <T> ObservableTransformer<HttpResult<T>, T> handleResult() {
-        BaseRxActivity baseActivity=(BaseRxActivity) getActivity();
+        BaseRxActivity baseActivity = (BaseRxActivity) getActivity();
         return baseActivity.handleResult();
     }
 

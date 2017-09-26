@@ -53,17 +53,17 @@ public class Gank extends BaseListEntity {
                                 zipItem = new Gank();
                                 Gank item = listHttpResult2.results.get(i);
                                 Gank gankInfo = listHttpResult.results.get(i);
-                                if(CollectionUtils.isEmpty(gankInfo.images)) {
+                                if (CollectionUtils.isEmpty(gankInfo.images)) {
                                     zipItem.imageUrl = item.url;
-                                }else {
-                                    zipItem.imageUrl =gankInfo.images.get(0);
+                                } else {
+                                    zipItem.imageUrl = gankInfo.images.get(0);
                                 }
                                 zipItem.url = gankInfo.url;
                                 zipItem.desc = gankInfo.desc;
                                 zipItem.who = gankInfo.who;
                                 zipResults.add(zipItem);
                             }
-                            zipItems.results=zipResults;
+                            zipItems.results = zipResults;
                             return zipItems;
                         })
                 .compose(RxSchedulers.io_main());

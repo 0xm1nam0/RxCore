@@ -23,8 +23,9 @@ public class RxException<T extends Throwable> implements Consumer<T> {
     private static final String UNKNOWNHOSTEXCEPTION = "网络异常，请检查您的网络状态";
 
     private Consumer<? super Throwable> onError;
+
     public RxException(Consumer<? super Throwable> onError) {
-        this.onError=onError;
+        this.onError = onError;
     }
 
     /**

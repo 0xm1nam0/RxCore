@@ -14,6 +14,7 @@ public interface BaseEntity {
     interface IListBean {
         //获取第几页
         Observable getPage(int page);
+
         //设置网络请求参数
         void setParam(Map<String, String> param);
     }

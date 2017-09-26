@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.github.weiss.core.BaseCoreActivity;
 import com.github.weiss.core.BaseRxActivity;
 import com.github.weiss.core.R;
 import com.github.weiss.core.entity.BaseListEntity;
@@ -34,7 +33,6 @@ import io.reactivex.functions.Consumer;
 import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
- *
  * Created by Weiss on 2017/1/17.
  */
 
@@ -164,16 +162,16 @@ public class PtrRecyclerView extends LinearLayout {
         }
         if (page != 1) {
             //演示等待对话框用法，加载更多不推荐这样使用
-            ((BaseCoreActivity) getContext()).showProgress("正在加载更多");
+            BaseRxActivity().showProgress("正在加载更多");
         }
         model.setParam(param);
         compositeDisposable.add(model.getPage(page)
-                .compose(((BaseRxActivity) getContext()).handleResult())
+                .compose(BaseRxActivity().handleResult())
                 .doAfterTerminate(() -> {
                     if (page == 1) {
                         ptrFrame.refreshComplete();
                     } else {
-                        ((BaseCoreActivity) getContext()).dismissProgress();
+                        BaseRxActivity().dismissProgress();
                     }
                 })
                 .subscribe(new Consumer<List<BaseListEntity>>() {
@@ -191,5 +189,9 @@ public class PtrRecyclerView extends LinearLayout {
                            },
                         new RxException<>(e -> e.printStackTrace()))
         );
+    }
+
+    public BaseRxActivity BaseRxActivity() {
+        return (BaseRxActivity) context;
     }
 }

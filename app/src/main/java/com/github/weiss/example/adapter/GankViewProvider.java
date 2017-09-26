@@ -46,7 +46,7 @@ public class GankViewProvider extends ItemViewProvider<Gank, GankViewProvider.Vi
         holder.image.setOriginalSize(50, 50);
         ImageLoaderUtil.loadGifImg(holder.image, gank.imageUrl);
         holder.image.setOnClickListener(view -> startPictureActivity(gank, view));
-        holder.itemView.setOnClickListener(view -> startWebActivity(gank,holder.itemView));
+        holder.itemView.setOnClickListener(view -> startWebActivity(gank, holder.itemView));
     }
 
     private void startPictureActivity(Gank gank, View transitView) {

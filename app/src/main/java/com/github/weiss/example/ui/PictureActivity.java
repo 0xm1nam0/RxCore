@@ -76,7 +76,7 @@ public class PictureActivity extends ToolbarActivity {
         super.initView();
         parseIntent();
         ViewCompat.setTransitionName(mImageView, TRANSIT_PIC);
-        ImageLoaderUtil.loadGifImg(mImageView,mImageUrl);
+        ImageLoaderUtil.loadGifImg(mImageView, mImageUrl);
         setAppBarAlpha(0.7f);
         setTitle(mImageTitle);
         setupPhotoAttacher();
@@ -132,7 +132,6 @@ public class PictureActivity extends ToolbarActivity {
     public void onResume() {
         super.onResume();
     }
-
 
 
     @Override

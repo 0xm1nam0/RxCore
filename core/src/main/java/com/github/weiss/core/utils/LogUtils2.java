@@ -25,11 +25,11 @@ public class LogUtils2 {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    private static boolean logSwitch      = true;
+    private static boolean logSwitch = true;
     private static boolean log2FileSwitch = false;
-    private static char    logFilter      = 'v';
-    private static String  tag            = "TAG";
-    private static String  dir            = null;
+    private static char logFilter = 'v';
+    private static String tag = "TAG";
+    private static String dir = null;
 
     /**
      * 初始化函数
@@ -69,10 +69,10 @@ public class LogUtils2 {
 
     public static class Builder {
 
-        private boolean logSwitch      = true;
+        private boolean logSwitch = true;
         private boolean log2FileSwitch = false;
-        private char    logFilter      = 'v';
-        private String  tag            = "TAG";
+        private char logFilter = 'v';
+        private String tag = "TAG";
 
         public Builder setLogSwitch(boolean logSwitch) {
             this.logSwitch = logSwitch;

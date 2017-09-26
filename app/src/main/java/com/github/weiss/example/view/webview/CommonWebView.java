@@ -11,47 +11,40 @@ import android.webkit.WebView;
 /**
  * 通用的WebView
  */
-public class CommonWebView extends WebView
-{
+public class CommonWebView extends WebView {
 
     public static final String ENCODING_UTF_8 = "UTF-8";
 
     public static final String MIME_TYPE = "text/html";
 
-    public CommonWebView(Context context)
-    {
+    public CommonWebView(Context context) {
 
         super(context);
         init();
     }
 
-    public CommonWebView(Context context, AttributeSet attrs)
-    {
+    public CommonWebView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
         init();
     }
 
-    public CommonWebView(Context context, AttributeSet attrs, int defStyleAttr)
-    {
+    public CommonWebView(Context context, AttributeSet attrs, int defStyleAttr) {
 
         super(context, attrs, defStyleAttr);
         init();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CommonWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes)
-    {
+    public CommonWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }
 
-    private void init()
-    {
+    private void init() {
 
-        if (isInEditMode())
-        {
+        if (isInEditMode()) {
             return;
         }
         WebSettings settings = getSettings();

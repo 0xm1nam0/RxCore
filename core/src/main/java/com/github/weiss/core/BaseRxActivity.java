@@ -12,7 +12,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * 管理RxJava生命周期，避免内存泄漏
  * RxJava处理服务器返回
- *
+ * <p>
  * Created by Weiss on 2016/12/23.
  */
 
@@ -32,20 +32,20 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
      * @return
      */
     public <T> ObservableTransformer<HttpResult<T>, T> handleResult() {
-        return upstream ->{
-                return upstream.flatMap(result -> {
-                            if (result.isSuccess()) {
-                                return createData(result.results);
-                            } else if (result.isTokenInvalid()) {
-                                //处理token时效
+        return upstream -> {
+            return upstream.flatMap(result -> {
+                        if (result.isSuccess()) {
+                            return createData(result.results);
+                        } else if (result.isTokenInvalid()) {
+                            //处理token时效
 //                               tokenInvalid();
-                            } else {
-                                return Observable.error(new Exception(result.msg));
-                            }
-                            return Observable.empty();
+                        } else {
+                            return Observable.error(new Exception(result.msg));
                         }
+                        return Observable.empty();
+                    }
 
-                );
+            );
         };
     }
 

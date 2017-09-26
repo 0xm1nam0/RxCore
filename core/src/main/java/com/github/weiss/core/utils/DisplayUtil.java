@@ -297,12 +297,11 @@ public class DisplayUtil {
     /**
      * 将sp值转换为dp值，保证文字大小不变
      *
-     * @param spValue
-     *            （DisplayMetrics类中属性scaledDensity）
+     * @param spValue （DisplayMetrics类中属性scaledDensity）
      * @return
      */
     public static int sp2dp(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int)px2dip(context, (spValue * fontScale + 0.5f));
+        return (int) px2dip(context, (spValue * fontScale + 0.5f));
     }
 }

@@ -12,28 +12,24 @@ import android.webkit.WebViewClient;
 import java.io.InputStream;
 
 
-public class LoveVideoView extends WebView
-{
+public class LoveVideoView extends WebView {
 
     private final Context mContext;
 
 
-    public LoveVideoView(Context context)
-    {
+    public LoveVideoView(Context context) {
 
         this(context, null);
     }
 
 
-    public LoveVideoView(Context context, AttributeSet attrs)
-    {
+    public LoveVideoView(Context context, AttributeSet attrs) {
 
         this(context, attrs, 0);
     }
 
 
-    public LoveVideoView(Context context, AttributeSet attrs, int defStyleAttr)
-    {
+    public LoveVideoView(Context context, AttributeSet attrs, int defStyleAttr) {
 
         super(context, attrs, defStyleAttr);
         mContext = context;
@@ -41,8 +37,7 @@ public class LoveVideoView extends WebView
     }
 
 
-    void init()
-    {
+    void init() {
 
         setWebViewClient(new LoveClient());
         setWebChromeClient(new Chrome());
@@ -59,12 +54,10 @@ public class LoveVideoView extends WebView
     }
 
 
-    private class LoveClient extends WebViewClient
-    {
+    private class LoveClient extends WebViewClient {
 
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url)
-        {
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
             view.loadUrl(url);
             return true;
@@ -72,30 +65,24 @@ public class LoveVideoView extends WebView
 
 
         @Override
-        public void onPageFinished(WebView view, String url)
-        {
+        public void onPageFinished(WebView view, String url) {
 
             super.onPageFinished(view, url);
             // 这些视频需要hack CSS才能达到全屏播放的效果
-            if (url.contains("www.vmovier.com"))
-            {
+            if (url.contains("www.vmovier.com")) {
                 injectCSS("vmovier.css");
-            } else if (url.contains("video.weibo.com"))
-            {
+            } else if (url.contains("video.weibo.com")) {
                 injectCSS("weibo.css");
-            } else if (url.contains("m.miaopai.com"))
-            {
+            } else if (url.contains("m.miaopai.com")) {
                 injectCSS("miaopai.css");
             }
         }
     }
 
 
-    private void injectCSS(String filename)
-    {
+    private void injectCSS(String filename) {
 
-        try
-        {
+        try {
             InputStream inputStream = mContext.getAssets().open(filename);
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
@@ -109,23 +96,19 @@ public class LoveVideoView extends WebView
                     "style.innerHTML = window.atob('" + encoded + "');" +
                     "parent.appendChild(style)" +
                     "})()");
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
     private class Chrome extends WebChromeClient
-            implements MediaPlayer.OnCompletionListener
-    {
+            implements MediaPlayer.OnCompletionListener {
 
         @Override
-        public void onCompletion(MediaPlayer player)
-        {
+        public void onCompletion(MediaPlayer player) {
 
-            if (player != null)
-            {
+            if (player != null) {
                 if (player.isPlaying()) player.stop();
                 player.reset();
                 player.release();

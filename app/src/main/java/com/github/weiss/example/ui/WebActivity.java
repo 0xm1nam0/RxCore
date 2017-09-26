@@ -23,8 +23,7 @@ import butterknife.BindView;
 /**
  * gank.IO详情web页面
  */
-public class WebActivity extends BaseActivity
-{
+public class WebActivity extends BaseActivity {
 
 //    @Bind(R.id.circle_progress)
 //    CircleProgressView mCircleProgressView;
@@ -46,8 +45,7 @@ public class WebActivity extends BaseActivity
 
 
     @Override
-    public int getLayoutId()
-    {
+    public int getLayoutId() {
 
         return R.layout.activity_web;
     }
@@ -59,8 +57,7 @@ public class WebActivity extends BaseActivity
     }*/
 
     @Override
-    public void initView()
-    {
+    public void initView() {
 
         Intent intent = getIntent();
         if (intent != null)
@@ -75,33 +72,28 @@ public class WebActivity extends BaseActivity
     }
 
 
-    public void initToolBar()
-    {
+    public void initToolBar() {
 
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null)
-        {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(title);
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_web, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
         int itemId = item.getItemId();
-        switch (itemId)
-        {
+        switch (itemId) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -120,34 +112,29 @@ public class WebActivity extends BaseActivity
     }
 
     @Override
-    protected void onNewIntent(Intent intent)
-    {
+    protected void onNewIntent(Intent intent) {
 
         super.onNewIntent(intent);
         parseIntent(intent);
     }
 
-    private void parseIntent(Intent intent)
-    {
+    private void parseIntent(Intent intent) {
 
         url = intent.getStringExtra(KEY_URL);
         title = intent.getStringExtra(KEY_TITLE);
 
-        if (TextUtils.isEmpty(url))
-        {
+        if (TextUtils.isEmpty(url)) {
             finish();
         }
     }
 
-    private void initWebSetting()
-    {
+    private void initWebSetting() {
 
         JsHandler jsHandler = new JsHandler(this, mCommonWebView);
         mCommonWebView.addJavascriptInterface(jsHandler, "JsHandler");
     }
 
-    public static boolean start(Activity activity, String url, String title)
-    {
+    public static boolean start(Activity activity, String url, String title) {
 
         Intent intent = new Intent();
         intent.setClass(activity, WebActivity.class);
@@ -158,8 +145,7 @@ public class WebActivity extends BaseActivity
         return true;
     }
 
-    public static boolean start(Activity activity, String url)
-    {
+    public static boolean start(Activity activity, String url) {
 
         return start(activity, url, null);
     }
@@ -173,8 +159,7 @@ public class WebActivity extends BaseActivity
     }*/
 
 
-    private void share()
-    {
+    private void share() {
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");

@@ -159,8 +159,8 @@ public class NetworkUtils {
      *
      * @param enabled {@code true}: 打开<br>{@code false}: 关闭
      */
-    public static void setWifiEnabled( boolean enabled) {
-        WifiManager wifiManager = (WifiManager)Utils.getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    public static void setWifiEnabled(boolean enabled) {
+        WifiManager wifiManager = (WifiManager) Utils.getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (enabled) {
             if (!wifiManager.isWifiEnabled()) {
                 wifiManager.setWifiEnabled(true);
@@ -207,9 +207,9 @@ public class NetworkUtils {
         return tm != null ? tm.getNetworkOperatorName() : null;
     }
 
-    private static final int NETWORK_TYPE_GSM      = 16;
+    private static final int NETWORK_TYPE_GSM = 16;
     private static final int NETWORK_TYPE_TD_SCDMA = 17;
-    private static final int NETWORK_TYPE_IWLAN    = 18;
+    private static final int NETWORK_TYPE_IWLAN = 18;
 
     /**
      * 获取当前网络类型

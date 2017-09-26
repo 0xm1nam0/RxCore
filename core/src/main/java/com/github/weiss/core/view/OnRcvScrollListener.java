@@ -7,7 +7,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 
 /**
  * @author Jack Tony
- * recyle view 滚动监听器
+ *         recyle view 滚动监听器
  * @date 2015/4/6
  */
 public abstract class OnRcvScrollListener extends RecyclerView.OnScrollListener {

@@ -9,8 +9,7 @@ import android.webkit.WebView;
 import com.github.weiss.example.R;
 
 
-public class JsHandler
-{
+public class JsHandler {
 
     Activity activity;
 
@@ -19,8 +18,7 @@ public class JsHandler
     WebView webView;
 
 
-    public JsHandler(Activity activity, WebView webView)
-    {
+    public JsHandler(Activity activity, WebView webView) {
 
         this.activity = activity;
         this.webView = webView;
@@ -29,8 +27,7 @@ public class JsHandler
     /**
      * This function handles call from JS
      */
-    public void jsFnCall(String jsString)
-    {
+    public void jsFnCall(String jsString) {
 
         showDialog(jsString);
     }
@@ -39,19 +36,16 @@ public class JsHandler
      * This function handles call from Android-Java
      */
     @JavascriptInterface
-    public void javaFnCall(String jsString)
-    {
+    public void javaFnCall(String jsString) {
 
         final String webUrl = "javascript:diplayJavaMsg('" + jsString + "')";
         // Add this to avoid android.view.windowmanager$badtokenexception unable to add window
         if (!activity.isFinishing())
             // load url on UI main thread
-            activity.runOnUiThread(new Runnable()
-            {
+            activity.runOnUiThread(new Runnable() {
 
                 @Override
-                public void run()
-                {
+                public void run() {
 
                     webView.loadUrl(webUrl);
                 }
@@ -61,29 +55,24 @@ public class JsHandler
     /**
      * function shows Android-Native Alert Dialog
      */
-    public void showDialog(String msg)
-    {
+    public void showDialog(String msg) {
 
         AlertDialog dialog = new AlertDialog.Builder(activity).create();
         dialog.setTitle(activity.getString(R.string.app_name));
         dialog.setMessage(msg);
         dialog.setButton(DialogInterface.BUTTON_POSITIVE, activity.getString(android.R.string.ok),
-                new DialogInterface.OnClickListener()
-                {
+                new DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
                     }
                 });
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, activity.getString(android.R.string.cancel),
-                new DialogInterface.OnClickListener()
-                {
+                new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
                     }

@@ -9,11 +9,12 @@ import com.github.weiss.core.BaseRxActivity;
 public abstract class BaseActivity extends BaseRxActivity {
 
     //token失效处理
-    public void tokenInvalid( ){
+    public void tokenInvalid() {
 
     }
+
     //是否登录
-    protected boolean isLogin(){
+    protected boolean isLogin() {
         return false;
     }
 }

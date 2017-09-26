@@ -3,11 +3,9 @@ package com.github.weiss.example.util;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-public class SnackbarUtil
-{
+public class SnackbarUtil {
 
-    public static void showMessage(View view, String text)
-    {
+    public static void showMessage(View view, String text) {
 
         Snackbar.make(view, text, Snackbar.LENGTH_SHORT).show();
     }

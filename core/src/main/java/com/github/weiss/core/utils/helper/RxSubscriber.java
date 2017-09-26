@@ -32,7 +32,7 @@ import io.reactivex.plugins.RxJavaPlugins;
  * Created by Weiss on 2017/2/9.
  */
 
-public class RxSubscriber<T extends HttpResult>  extends AtomicReference<Subscription> implements Subscriber<T>, Subscription, Disposable {
+public class RxSubscriber<T extends HttpResult> extends AtomicReference<Subscription> implements Subscriber<T>, Subscription, Disposable {
 
     private static final String TAG = "RxSubscriber";
 
@@ -51,12 +51,12 @@ public class RxSubscriber<T extends HttpResult>  extends AtomicReference<Subscri
         this.onNext = onNext;
         this.onError = onError;
         this.onComplete = Functions.EMPTY_ACTION;
-        this.onSubscribe =  FlowableInternalHelper.RequestMax.INSTANCE;
+        this.onSubscribe = FlowableInternalHelper.RequestMax.INSTANCE;
     }
 
     public RxSubscriber(Consumer<? super T> onNext, Consumer<? super Throwable> onError,
-                            Action onComplete,
-                            Consumer<? super Subscription> onSubscribe) {
+                        Action onComplete,
+                        Consumer<? super Subscription> onSubscribe) {
         super();
         this.onNext = onNext;
         this.onError = onError;

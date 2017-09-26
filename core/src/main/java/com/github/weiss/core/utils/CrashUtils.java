@@ -13,6 +13,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 /**
  * <pre>
  *     author: Blankj
@@ -29,9 +30,9 @@ public class CrashUtils
     private UncaughtExceptionHandler mHandler;
 
     private boolean mInitialized;
-    private String  crashDir;
-    private String  versionName;
-    private int     versionCode;
+    private String crashDir;
+    private String versionName;
+    private int versionCode;
 
     private CrashUtils() {
     }

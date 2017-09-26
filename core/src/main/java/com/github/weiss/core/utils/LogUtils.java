@@ -31,6 +31,7 @@ public class LogUtils {
 
     /**
      * 获取当前类名
+     *
      * @return
      */
     private static String getClassName() {
@@ -92,6 +93,7 @@ public class LogUtils {
             Log.i(getClassName(), msg);
         }
     }
+
     /**
      * error log
      *
@@ -108,7 +110,6 @@ public class LogUtils {
             Log.i(tag, logString);
         }
     }
-
 
 
     public static void w(String tag, String logString) {

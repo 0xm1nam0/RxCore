@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
  * Created by Weiss on 2017/1/10.
  */
 
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment {
     public View rootView;
     public LayoutInflater inflater;
 
@@ -21,7 +21,7 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        this.inflater=inflater;
+        this.inflater = inflater;
         if (rootView == null) {
             rootView = inflater.inflate(this.getLayoutId(), container, false);
             ButterKnife.bind(this, rootView);

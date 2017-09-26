@@ -190,9 +190,9 @@ public class LunarUtils {
 
     public static class Lunar {
         public boolean isLeap;
-        public int     lunarDay;
-        public int     lunarMonth;
-        public int     lunarYear;
+        public int lunarDay;
+        public int lunarMonth;
+        public int lunarYear;
     }
 
     public static class Solar {

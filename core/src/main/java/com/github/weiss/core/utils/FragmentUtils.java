@@ -10,5 +10,5 @@ package com.github.weiss.core.utils;
  */
 public class FragmentUtils {
 
-    
+
 }

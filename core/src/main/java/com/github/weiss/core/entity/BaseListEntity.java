@@ -13,7 +13,7 @@ public abstract class BaseListEntity<T> extends BaseEntity.BaseBean implements B
 
     @Override
     public void setParam(Map<String, String> param) {
-        this.param=param;
+        this.param = param;
     }
 
     @Override

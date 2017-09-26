@@ -34,7 +34,7 @@ public class BaseApp extends Application {
             return;
         }
         LeakCanary.install(this);
-        app=this;
+        app = this;
         SPUtils.init(this);
         Utils.init(this);
         CrashUtils.getInstance().init();

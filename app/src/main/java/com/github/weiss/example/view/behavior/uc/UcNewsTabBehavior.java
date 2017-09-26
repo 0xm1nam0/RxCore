@@ -47,7 +47,7 @@ public class UcNewsTabBehavior extends HeaderScrollingViewBehavior {
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "onDependentViewChanged: dependency.getTranslationY():"+dependency.getTranslationY());
+            Log.d(TAG, "onDependentViewChanged: dependency.getTranslationY():" + dependency.getTranslationY());
         }
         offsetChildAsNeeded(parent, child, dependency);
         return false;

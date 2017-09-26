@@ -8,8 +8,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
-public class CommonWebChromeClient extends WebChromeClient
-{
+public class CommonWebChromeClient extends WebChromeClient {
 
     private ProgressBar mBar;
 
@@ -17,14 +16,12 @@ public class CommonWebChromeClient extends WebChromeClient
 
     private ActionBar mActionBar;
 
-    public CommonWebChromeClient(ProgressBar bar, View loadingView)
-    {
+    public CommonWebChromeClient(ProgressBar bar, View loadingView) {
 
         this(bar, loadingView, null);
     }
 
-    public CommonWebChromeClient(ProgressBar bar, View loadingView, ActionBar actionBar)
-    {
+    public CommonWebChromeClient(ProgressBar bar, View loadingView, ActionBar actionBar) {
 
         mBar = bar;
         mLoadingView = loadingView;
@@ -32,24 +29,19 @@ public class CommonWebChromeClient extends WebChromeClient
     }
 
     @Override
-    public void onReceivedTitle(WebView view, String title)
-    {
+    public void onReceivedTitle(WebView view, String title) {
 
-        if (mActionBar != null)
-        {
+        if (mActionBar != null) {
             mActionBar.setTitle(title);
         }
     }
 
     @Override
-    public void onProgressChanged(WebView view, int newProgress)
-    {
+    public void onProgressChanged(WebView view, int newProgress) {
 
-        if (mBar != null)
-        {
+        if (mBar != null) {
             mBar.setProgress(newProgress);
-            if (newProgress >= 100)
-            {
+            if (newProgress >= 100) {
                 mBar.setVisibility(View.GONE);
                 mLoadingView.setVisibility(View.GONE);
             }
@@ -57,22 +49,19 @@ public class CommonWebChromeClient extends WebChromeClient
     }
 
     @Override
-    public boolean onJsAlert(WebView view, String url, String message, JsResult result)
-    {
+    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
 
         return super.onJsAlert(view, url, message, result);
     }
 
     @Override
-    public boolean onJsConfirm(WebView view, String url, String message, JsResult result)
-    {
+    public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
 
         return super.onJsConfirm(view, url, message, result);
     }
 
     @Override
-    public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result)
-    {
+    public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
 
         return super.onJsPrompt(view, url, message, defaultValue, result);
     }
