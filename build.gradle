@@ -4,6 +4,10 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 
     dependencies {
@@ -23,6 +27,10 @@ allprojects {
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 }
 
@@ -34,16 +42,16 @@ ext {
     releaseVersionCode = 1
     releaseVersionName = '1.0.0'
 
-    androidCompileSdkVersion = 25
-    androidBuildToolsVersion = '25.1.0'
-    androidSupportSdkVersion = '25.1.0'
+    androidCompileSdkVersion = 26
+    androidBuildToolsVersion = '26.1.0'
+    androidSupportSdkVersion = '27.1.0'
     minSdkVersion = 16
     targetSdkVersion = 24
 
     junitVersion = '4.12'
 
-    rxjava2Version = '2.0.8'
-    retrofit2Version = '2.2.0'
+    rxjava2Version = '2.1.11'
+    retrofit2Version = '2.4.0'
     gsonVersion = '2.6.2'
     butterknifeVersion = '8.4.0'
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.github.weiss.core.entity.HttpResult;
 
+import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -31,7 +32,21 @@ public abstract class BaseRxFragment extends BaseFragment {
      */
     public <T> ObservableTransformer<HttpResult<T>, T> handleResult() {
         BaseRxActivity baseActivity = (BaseRxActivity) getActivity();
-        return baseActivity.handleResult();
+        if(baseActivity !=null) {
+            return baseActivity.handleResult();
+        }else {
+            return handleError();
+        }
+    }
+
+    public <T> ObservableTransformer<HttpResult<T>, T> handleError() {
+        return upstream -> {
+            return upstream.flatMap(result -> {
+                return Observable.error(new Exception("getActivity() is null"));
+                    }
+
+            );
+        };
     }
 
     public boolean addRxStop(Disposable disposable) {

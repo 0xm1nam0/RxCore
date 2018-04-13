@@ -4,7 +4,7 @@ package com.github.weiss.core.entity;
  * Created by Weiss on 2017/1/11.
  */
 
-public class HttpResult<T> extends BaseEntity.BaseBean {
+public class HttpResult<T> extends Entity {
     public String code;
     public String msg;
     public boolean hasmore;

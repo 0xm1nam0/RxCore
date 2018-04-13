@@ -3,6 +3,7 @@ package com.github.weiss.core;
 import android.os.Bundle;
 
 import com.github.weiss.core.entity.HttpResult;
+import com.github.weiss.core.utils.ToastUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
@@ -18,8 +19,8 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class BaseRxActivity extends BaseCoreActivity {
 
-    private CompositeDisposable disposables2Stop;// 管理Stop取消订阅者者
-    private CompositeDisposable disposables2Destroy;// 管理Destroy取消订阅者者
+    protected CompositeDisposable disposables2Stop;// 管理Stop取消订阅者者
+    protected CompositeDisposable disposables2Destroy;// 管理Destroy取消订阅者者
 
     protected abstract int getLayoutId();
 
@@ -37,8 +38,14 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
         return upstream -> {
             return upstream.flatMap(result -> {
                         if (result.isSuccess()) {
-                            return createData(result.results);
-                        } else if (!needHandleResult(result)) {
+                            if(result.results == null){
+                                Observable.empty();
+                            }else {
+                                return createData(result.results);
+                            }
+                        } else if (result.isShowToast()) {
+                            ToastUtils.show(result.msg);
+                        }else if (!needHandleResult(result)) {
                             return Observable.error(new Exception(result.msg));
                         }
                         return Observable.empty();
@@ -48,7 +55,7 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
         };
     }
 
-    private <T> Observable<T> createData(final T t) {
+    protected  <T> Observable<T> createData(final T t) {
         return Observable.create(subscriber -> {
             try {
                 subscriber.onNext(t);
@@ -89,23 +96,23 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
         }
     }
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
         if (disposables2Destroy != null) {
             throw new IllegalStateException("onCreate called multiple times");
         }
         disposables2Destroy = new CompositeDisposable();
+        super.onCreate(savedInstanceState);
     }
 
-    public void onStart() {
-        super.onStart();
+    protected void onStart() {
         if (disposables2Stop != null) {
             throw new IllegalStateException("onStart called multiple times");
         }
         disposables2Stop = new CompositeDisposable();
+        super.onStart();
     }
 
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
         if (disposables2Stop == null) {
             throw new IllegalStateException("onStop called multiple times or onStart not called");
@@ -114,7 +121,7 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
         disposables2Stop = null;
     }
 
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         if (disposables2Destroy == null) {
             throw new IllegalStateException(

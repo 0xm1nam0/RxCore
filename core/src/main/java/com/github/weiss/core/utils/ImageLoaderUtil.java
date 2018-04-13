@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.github.weiss.core.utils.helper.GlideCircleTransform;
 
@@ -23,20 +24,37 @@ import java.io.IOException;
  * 图片加载框架封装类
  */
 public class ImageLoaderUtil {
+
+    public static final String BASE_URL = "http://47.104.77.17/";
+
     public static void loadImg(ImageView v, String url) {
+        if(!url.startsWith("http")){
+            url = BASE_URL + url;
+        }
         Glide.with(v.getContext())
                 .load(url)
-                .fitCenter()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(new RequestOptions()
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                .into(v);
+    }
+
+    public static void loadImg(ImageView v, int resourceId) {
+        Glide.with(v.getContext())
+                .load(resourceId)
+                .apply(new RequestOptions()
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(v);
     }
 
     public static void loadGifImg(ImageView v, String url) {
         Glide.with(v.getContext())
                 .load(url)
-                .asBitmap()
-                .fitCenter()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(new RequestOptions()
+//                        .asBitmap()
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
 //                .placeholder(R.drawable.head_portrait)
                 .into(v);
     }
@@ -44,23 +62,28 @@ public class ImageLoaderUtil {
 
     public static void loadCircleImg(ImageView v, String url) {
         Glide.with(v.getContext())
-                .load(url)
-                .transform(new GlideCircleTransform(v.getContext()))
+                .load(url).apply(new RequestOptions()
+                .transform(new GlideCircleTransform(v.getContext())))
 //                .placeholder(R.drawable.head_portrait)
                 .into(v);
     }
 
     public static void loadImgFillCenter(ImageView v, String localPath) {
         Glide.with(v.getContext()).load(localPath)
-                .centerCrop()
+                .apply(new RequestOptions()
+//                        .asBitmap()
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(v);
     }
 
     public static void loadAdapterImg(ImageView v, String url, final View itemView) {
         Glide.with(v.getContext())
                 .load(url)
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(new RequestOptions()
+//                        .asBitmap()
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
 //                .placeholder(R.drawable.placeholder_image)
                 .into(v)
                 .getSize(new SizeReadyCallback() {

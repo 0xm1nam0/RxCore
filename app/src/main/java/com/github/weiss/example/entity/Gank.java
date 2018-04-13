@@ -1,7 +1,7 @@
 package com.github.weiss.example.entity;
 
-import com.github.weiss.core.entity.BaseListEntity;
 import com.github.weiss.core.entity.HttpResult;
+import com.github.weiss.core.entity.ListEntity;
 import com.github.weiss.core.utils.CollectionUtils;
 import com.github.weiss.core.utils.helper.RxSchedulers;
 import com.github.weiss.example.api.GankApi;
@@ -16,7 +16,7 @@ import io.reactivex.functions.BiFunction;
  * Created by Weiss on 2017/1/20.
  */
 
-public class Gank extends BaseListEntity {
+public class Gank extends ListEntity {
 
     public String _id;
 

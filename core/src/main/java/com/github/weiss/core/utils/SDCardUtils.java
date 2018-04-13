@@ -33,6 +33,10 @@ public class SDCardUtils {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
+    public static String getCachePath(String cachePath) {
+        if (!isSDCardEnable()) return Environment.getDownloadCacheDirectory().getPath() + File.separator + cachePath + File.separator;;
+        return Environment.getExternalStorageDirectory().getPath() + File.separator + cachePath + File.separator;
+    }
     /**
      * 获取SD卡路径
      * <p>先用shell，shell失败再普通方法获取，一般是/storage/emulated/0/</p>

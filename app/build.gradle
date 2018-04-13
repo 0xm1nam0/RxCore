@@ -3,14 +3,14 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.github.weiss.example"
-        minSdkVersion 21
-        targetSdkVersion 25
-        versionCode 1
-        versionName "0.1"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 /*        externalNativeBuild {
             cmake {

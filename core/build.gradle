@@ -10,14 +10,14 @@ apply plugin: 'me.tatarka.retrolambda'
 }*/
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -43,7 +43,7 @@ dependencies {
 
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:glide:4.6.1'
 
     compile "com.android.support:appcompat-v7:$rootProject.ext.androidSupportSdkVersion"
     compile "com.android.support:design:$rootProject.ext.androidSupportSdkVersion"
@@ -62,5 +62,6 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     compile "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    compile "com.flyco.systembar:FlycoSystemBar_Lib:1.0.0@aar"
     testCompile 'junit:junit:4.12'
 }

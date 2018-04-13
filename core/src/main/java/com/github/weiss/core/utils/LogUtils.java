@@ -28,6 +28,7 @@ import com.github.weiss.core.BuildConfig;
 public class LogUtils {
 
     private static final boolean DEBUG = BuildConfig.DEBUG;
+    private static final String TAG = "LogUtils";
 
     /**
      * 获取当前类名
@@ -46,7 +47,7 @@ public class LogUtils {
 
     public static void w(String logString) {
         if (DEBUG) {
-            Log.w(getClassName(), logString);
+            Log.w(TAG+" "+getClassName(), logString);
         }
     }
 
@@ -79,7 +80,7 @@ public class LogUtils {
      */
     public static void d(String msg) {
         if (DEBUG) {
-            Log.d(getClassName(), msg);
+            Log.d(TAG+" "+getClassName(), msg);
         }
     }
 
@@ -90,7 +91,7 @@ public class LogUtils {
      */
     public static void i(String msg) {
         if (DEBUG) {
-            Log.i(getClassName(), msg);
+            Log.i(TAG+" "+getClassName(), msg);
         }
     }
 
@@ -101,7 +102,7 @@ public class LogUtils {
      */
     public static void e(String msg) {
         if (DEBUG) {
-            Log.e(getClassName(), msg);
+            Log.e(TAG+" "+getClassName(), msg);
         }
     }
 

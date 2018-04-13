@@ -15,7 +15,8 @@ import android.widget.LinearLayout;
 
 import com.github.weiss.core.BaseRxActivity;
 import com.github.weiss.core.R;
-import com.github.weiss.core.entity.BaseListEntity;
+import com.github.weiss.core.entity.ListEntity;
+import com.github.weiss.core.utils.CollectionUtils;
 import com.github.weiss.core.utils.LogUtils;
 import com.github.weiss.core.utils.helper.RxException;
 
@@ -36,20 +37,25 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * Created by Weiss on 2017/1/17.
  */
 
-public class PtrRecyclerView extends LinearLayout {
+public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.LoadMoreSubject {
 
     //    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     //    @BindView(R.id.store_house_ptr_frame)
     PtrClassicFrameLayout ptrFrame;
 
+    private LoadMoreDelegate loadMoreDelegate;
+
     private Context context;
     private MultiTypeAdapter adapter;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    List<BaseListEntity> listResult = new ArrayList<>();
-    private BaseListEntity model;
-    private int page = 1;
+    List<ListEntity> listResult = new ArrayList<>();
+    private ListEntity model;
+    public int page = 0;
+    public final static int PAGEBEGIN = 0;
     private Map<String, String> param = new HashMap<>();
+    private RxListener rxListener;
+    private boolean isRequest = false;
 
     public PtrRecyclerView(Context context) {
         super(context);
@@ -77,6 +83,10 @@ public class PtrRecyclerView extends LinearLayout {
         return this;
     }
 
+    public void setRxListener(RxListener rxListener) {
+        this.rxListener = rxListener;
+    }
+
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
@@ -93,6 +103,7 @@ public class PtrRecyclerView extends LinearLayout {
         addView(layout);
         recyclerView = (RecyclerView) layout.findViewById(R.id.recyclerView);
         ptrFrame = (PtrClassicFrameLayout) layout.findViewById(R.id.store_house_ptr_frame);
+        loadMoreDelegate = new LoadMoreDelegate(this);
 //        ButterKnife.bind(this, layout);
         initView(context);
     }
@@ -102,7 +113,7 @@ public class PtrRecyclerView extends LinearLayout {
         ptrFrame.setPtrHandler(new PtrHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                page = 1;
+                page = PAGEBEGIN;
                 request();
             }
 
@@ -128,8 +139,8 @@ public class PtrRecyclerView extends LinearLayout {
 
             @Override
             public void onBottom() {
-                page++;
-                request();
+//                page++;
+//                request();
             }
 
             @Override
@@ -138,6 +149,16 @@ public class PtrRecyclerView extends LinearLayout {
             }
 
         });
+        loadMoreDelegate.attach(recyclerView);
+    }
+
+    public void setPullToRefresh(boolean pullToRefresh) {
+        ptrFrame.setPullToRefresh(pullToRefresh);
+    }
+
+    public void refresh() {
+        page = PAGEBEGIN;
+        request();
     }
 
     public void setLayoutManager(RecyclerView.LayoutManager layout) {
@@ -148,7 +169,7 @@ public class PtrRecyclerView extends LinearLayout {
         recyclerView.addOnScrollListener(onScrollListener);
     }
 
-    public void setAdapter(MultiTypeAdapter adapter, BaseListEntity model) {
+    public void setAdapter(MultiTypeAdapter adapter, ListEntity model) {
         this.adapter = adapter;
         recyclerView.setAdapter(adapter);
         this.model = model;
@@ -156,42 +177,97 @@ public class PtrRecyclerView extends LinearLayout {
     }
 
     private void request() {
+        isRequest = true;
         if (model == null) {
             LogUtils.e("model", "null");
             return;
         }
-        if (page != 1) {
+        if (page != PAGEBEGIN) {
             //演示等待对话框用法，加载更多不推荐这样使用
-            BaseRxActivity().showProgress("正在加载更多");
+//            BaseRxActivity().showProgress("正在加载更多");
         }
         model.setParam(param);
         compositeDisposable.add(model.getPage(page)
                 .compose(BaseRxActivity().handleResult())
                 .doAfterTerminate(() -> {
-                    if (page == 1) {
+                    if (page == PAGEBEGIN) {
                         ptrFrame.refreshComplete();
                     } else {
                         BaseRxActivity().dismissProgress();
                     }
+                    if (rxListener != null) {
+                        rxListener.onCompleted();
+                    }
+                    isRequest = false;
                 })
-                .subscribe(new Consumer<List<BaseListEntity>>() {
+                .subscribe(new Consumer<List<ListEntity>>() {
                                @Override
-                               public void accept(List<BaseListEntity> results) throws Exception {
-                                   if (page == 1) {
+                               public void accept(List<ListEntity> results) throws Exception {
+                                   if (page == PAGEBEGIN) {
                                        listResult.clear();
                                        listResult = results;
                                    } else {
                                        listResult.addAll(results);
                                    }
-                                   adapter.setItems(listResult);
-                                   adapter.notifyDataSetChanged();
+                                   if (rxListener != null) {
+                                       if (CollectionUtils.isEmpty(listResult)) {
+                                           rxListener.onEmpty();
+                                       } else {
+                                           rxListener.onSuccess();
+                                       }
+                                   }
+                                   if (CollectionUtils.isEmpty(results)) {
+                                       page--;
+                                   } else {
+                                       adapter.setItems(listResult);
+                                       adapter.notifyDataSetChanged();
+                                   }
                                }
                            },
-                        new RxException<>(e -> e.printStackTrace()))
+                        new RxException<>(e -> {
+                            if(page > PAGEBEGIN) {
+                                page--;
+                            }
+                            e.printStackTrace();
+                            if (rxListener != null) {
+                                rxListener.onError(e.getMessage());
+                            }
+                        }))
         );
     }
 
     public BaseRxActivity BaseRxActivity() {
         return (BaseRxActivity) context;
+    }
+
+    public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
+        recyclerView.addItemDecoration(itemDecoration);
+    }
+
+    protected boolean onInterceptLoadMore() {
+        return false;
+    }
+
+    @Override
+    public boolean isLoading() {
+        return false;
+    }
+
+    @Override
+    public void onLoadMore() {
+        if (!onInterceptLoadMore() && !isRequest) {
+            page++;
+            request();
+        }
+    }
+
+    public interface RxListener {
+        void onSuccess();
+
+        void onError(String Throwable);
+
+        void onEmpty();
+
+        void onCompleted();
     }
 }

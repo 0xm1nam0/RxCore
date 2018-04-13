@@ -9,7 +9,7 @@ import io.reactivex.Observable;
  * Created by Weiss on 2017/1/21.
  */
 
-public abstract class BaseListEntity<T> extends BaseEntity.BaseBean implements BaseEntity.IListBean {
+public abstract class ListEntity<T> extends Entity implements IListBean {
 
     @Override
     public void setParam(Map<String, String> param) {
