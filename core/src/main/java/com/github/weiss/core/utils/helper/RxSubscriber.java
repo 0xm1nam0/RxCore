@@ -5,7 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
-import com.github.weiss.core.entity.HttpResult;
+import com.github.weiss.core.entity.BaseHttpResult;
 import com.github.weiss.core.utils.ToastUtils;
 
 import org.reactivestreams.Subscriber;
@@ -32,7 +32,7 @@ import io.reactivex.plugins.RxJavaPlugins;
  * Created by Weiss on 2017/2/9.
  */
 
-public class RxSubscriber<T extends HttpResult> extends AtomicReference<Subscription> implements Subscriber<T>, Subscription, Disposable {
+public class RxSubscriber<T extends BaseHttpResult> extends AtomicReference<Subscription> implements Subscriber<T>, Subscription, Disposable {
 
     private static final String TAG = "RxSubscriber";
 
@@ -86,10 +86,10 @@ public class RxSubscriber<T extends HttpResult> extends AtomicReference<Subscrip
                 if (t.isSuccess()) {
                     onNext.accept(t);
                 } else if (t.isShowToast()) {
-                    ToastUtils.show(t.msg);
+                    ToastUtils.show(t.getMsg());
                 } else {
-                    Log.e(TAG, "onNext: ----" + t.msg);
-                    RxJavaPlugins.onError(new Throwable(t.msg));
+                    Log.e(TAG, "onNext: ----" + t.getMsg());
+                    RxJavaPlugins.onError(new Throwable(t.getMsg()));
                 }
             } catch (Throwable e) {
                 Exceptions.throwIfFatal(e);

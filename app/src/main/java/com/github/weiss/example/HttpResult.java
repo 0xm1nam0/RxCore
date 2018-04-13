@@ -1,10 +1,12 @@
-package com.github.weiss.core.entity;
+package com.github.weiss.example;
+
+import com.github.weiss.core.entity.BaseHttpResult;
 
 /**
  * Created by Weiss on 2017/1/11.
  */
 
-public class HttpResult<T> extends Entity {
+public class HttpResult<T> extends BaseHttpResult<T> {
     public String code;
     public String msg;
     public boolean hasmore;
@@ -29,6 +31,21 @@ public class HttpResult<T> extends Entity {
 
     public boolean isShowToast() {
         return SHOW_TOAST.equals(code);
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public String getMsg() {
+        return msg;
+    }
+
+    @Override
+    public T getData() {
+        return results;
     }
 
     public boolean hasMore() {

@@ -17,5 +17,5 @@ public abstract class ListEntity<T> extends Entity implements IListBean {
     }
 
     @Override
-    public abstract Observable<HttpResult<List<T>>> getPage(int page);
+    public abstract Observable<BaseHttpResult<List<T>>> getPage(int page);
 }

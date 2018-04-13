@@ -2,7 +2,7 @@ package com.github.weiss.core;
 
 import android.os.Bundle;
 
-import com.github.weiss.core.entity.HttpResult;
+import com.github.weiss.core.entity.BaseHttpResult;
 import com.github.weiss.core.utils.ToastUtils;
 
 import io.reactivex.Observable;
@@ -26,7 +26,7 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
 
     protected abstract void initView();
 
-    protected abstract boolean needHandleResult(HttpResult result);
+    protected abstract boolean needHandleResult(BaseHttpResult result);
 
     /**
      * Rx优雅处理服务器返回
@@ -34,19 +34,19 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
      * @param <T>
      * @return
      */
-    public <T> ObservableTransformer<HttpResult<T>, T> handleResult() {
+    public <T> ObservableTransformer<BaseHttpResult<T>, T> handleResult() {
         return upstream -> {
             return upstream.flatMap(result -> {
                         if (result.isSuccess()) {
-                            if(result.results == null){
+                            if(result.getData() == null){
                                 Observable.empty();
                             }else {
-                                return createData(result.results);
+                                return createData(result.getData());
                             }
                         } else if (result.isShowToast()) {
-                            ToastUtils.show(result.msg);
+                            ToastUtils.show(result.getMsg());
                         }else if (!needHandleResult(result)) {
-                            return Observable.error(new Exception(result.msg));
+                            return Observable.error(new Exception(result.getMsg()));
                         }
                         return Observable.empty();
                     }

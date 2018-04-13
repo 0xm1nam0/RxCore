@@ -1,9 +1,10 @@
 package com.github.weiss.example.entity;
 
-import com.github.weiss.core.entity.HttpResult;
+import com.github.weiss.core.entity.BaseHttpResult;
 import com.github.weiss.core.entity.ListEntity;
 import com.github.weiss.core.utils.CollectionUtils;
 import com.github.weiss.core.utils.helper.RxSchedulers;
+import com.github.weiss.example.HttpResult;
 import com.github.weiss.example.api.GankApi;
 
 import java.util.ArrayList;
