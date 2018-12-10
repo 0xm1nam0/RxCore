@@ -8,13 +8,14 @@ buildscript {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.2.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
-        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc2'
+//        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -44,7 +45,7 @@ ext {
 
     androidCompileSdkVersion = 26
     androidBuildToolsVersion = '26.1.0'
-    androidSupportSdkVersion = '27.1.0'
+    androidSupportSdkVersion = '28.0.0'
     minSdkVersion = 16
     targetSdkVersion = 24
 
@@ -53,5 +54,5 @@ ext {
     rxjava2Version = '2.1.11'
     retrofit2Version = '2.4.0'
     gsonVersion = '2.6.2'
-    butterknifeVersion = '8.4.0'
+    butterknifeVersion = '9.0.0-rc2'
 }
