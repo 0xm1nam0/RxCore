@@ -763,7 +763,39 @@ public class FileUtils {
             CloseUtils.closeIO(is, os);
         }
     }
+    /**
+     * 将byte[]写入文件
+     *
+     * @param filePath 文件路径
+     * @return 字符数组
+     */
+    public static boolean writeFileFromBytes(String filePath,byte[] bytes, boolean append) {
+        return writeFileFromBytes(getFileByPath(filePath),bytes,append);
+    }
 
+    /**
+     * 将byte[]写入文件
+     *
+     * @param file 文件
+     * @return 字符数组
+     */
+    public static boolean writeFileFromBytes(File file,byte[] bytes, boolean append) {
+        if(append) {
+            if (file == null) return false;
+            // 源文件不存在或者不是文件则返回false
+            if (!file.exists() || !file.isFile()) return false;
+            // 目标目录不存在返回false
+            if (!createOrExistsDir(file.getParentFile())) return false;
+        }else {
+            FileUtils.createOrExistsFile(file);
+        }
+        try {
+            return writeFileFromIS(file,ConvertUtils.bytes2InputStream(bytes),append);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     /**
      * 将字符串写入文件
      *
@@ -906,7 +938,7 @@ public class FileUtils {
             }
             // 要去除最后的换行符
             return sb.delete(sb.length() - 2, sb.length()).toString();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         } finally {

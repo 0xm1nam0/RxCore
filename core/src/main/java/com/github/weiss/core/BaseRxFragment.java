@@ -2,6 +2,7 @@ package com.github.weiss.core;
 
 import android.os.Bundle;
 
+import com.github.weiss.core.api.NullableResult;
 import com.github.weiss.core.entity.BaseHttpResult;
 
 import io.reactivex.Observable;
@@ -30,19 +31,19 @@ public abstract class BaseRxFragment extends BaseFragment {
      * @param <T>
      * @return
      */
-    public <T> ObservableTransformer<BaseHttpResult<T>, T> handleResult() {
+    public <T> ObservableTransformer<BaseHttpResult<T>, NullableResult<T>> handleResult() {
         BaseRxActivity baseActivity = (BaseRxActivity) getActivity();
-        if(baseActivity !=null) {
+        if (baseActivity != null) {
             return baseActivity.handleResult();
-        }else {
+        } else {
             return handleError();
         }
     }
 
-    public <T> ObservableTransformer<BaseHttpResult<T>, T> handleError() {
+    public <T> ObservableTransformer<BaseHttpResult<T>, NullableResult<T>> handleError() {
         return upstream -> {
             return upstream.flatMap(result -> {
-                return Observable.error(new Exception("getActivity() is null"));
+                        return Observable.error(new Exception("getActivity() is null"));
                     }
 
             );

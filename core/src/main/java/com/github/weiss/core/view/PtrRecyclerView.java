@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import com.github.weiss.core.BaseRxActivity;
 import com.github.weiss.core.R;
+import com.github.weiss.core.api.NullableResult;
 import com.github.weiss.core.entity.ListEntity;
 import com.github.weiss.core.utils.CollectionUtils;
 import com.github.weiss.core.utils.LogUtils;
@@ -200,14 +201,14 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
                     }
                     isRequest = false;
                 })
-                .subscribe(new Consumer<List<ListEntity>>() {
+                .subscribe(new Consumer<NullableResult<List<ListEntity>>>() {
                                @Override
-                               public void accept(List<ListEntity> results) throws Exception {
+                               public void accept(NullableResult<List<ListEntity>> results) throws Exception {
                                    if (page == PAGEBEGIN) {
                                        listResult.clear();
-                                       listResult = results;
+                                       listResult = results.get();
                                    } else {
-                                       listResult.addAll(results);
+                                       listResult.addAll(results.get());
                                    }
                                    if (rxListener != null) {
                                        if (CollectionUtils.isEmpty(listResult)) {
@@ -216,7 +217,7 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
                                            rxListener.onSuccess();
                                        }
                                    }
-                                   if (CollectionUtils.isEmpty(results)) {
+                                   if (CollectionUtils.isEmpty(results.get())) {
                                        page--;
                                    } else {
                                        adapter.setItems(listResult);

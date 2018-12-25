@@ -25,16 +25,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by weiss on 2016/12/23.
  */
-public class GankApi {
+public class Api {
 
     public static final String BASE_URL = "http://gank.io/api/";
     public static final int DEFAULT_TIMEOUT = 7676;
 
     public Retrofit retrofit;
-    public GankApiService service;
+    public ApiService service;
 
     //构造方法私有
-    private GankApi() {
+    private Api() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -58,16 +58,16 @@ public class GankApi {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(BASE_URL)
                 .build();
-        service = retrofit.create(GankApiService.class);
+        service = retrofit.create(ApiService.class);
     }
 
     //在访问HttpMethods时创建单例
     private static class SingletonHolder {
-        private static final GankApi INSTANCE = new GankApi();
+        private static final Api INSTANCE = new Api();
     }
 
     //获取单例
-    public static GankApi getInstance() {
+    public static Api getInstance() {
         return SingletonHolder.INSTANCE;
     }
 

@@ -20,7 +20,7 @@ public class RxException<T extends Throwable> implements Consumer<T> {
 
     private static final String SOCKETTIMEOUTEXCEPTION = "网络连接超时，请检查您的网络状态，稍后重试";
     private static final String CONNECTEXCEPTION = "网络连接异常，请检查您的网络状态";
-    private static final String UNKNOWNHOSTEXCEPTION = "网络异常，请检查您的网络状态";
+    private static final String UNKNOWNHOSTEXCEPTION = "无可用的网络连接，请稍后重试";
 
     private Consumer<? super Throwable> onError;
 

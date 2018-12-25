@@ -1,4 +1,4 @@
-package com.github.weiss.example.adapter;
+package com.github.weiss.core.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 
 public class ButterKnifeViewHolder extends RecyclerView.ViewHolder {
 
-    ButterKnifeViewHolder(View itemView) {
+    protected ButterKnifeViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }

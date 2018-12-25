@@ -1,5 +1,7 @@
 package com.github.weiss.core.entity;
 
+import com.github.weiss.core.api.NullableResult;
+
 /**
  * Created by Weiss on 2017/1/11.
  */
@@ -17,4 +19,8 @@ public abstract class BaseHttpResult<T> extends Entity {
     public abstract String getMsg();
 
     public abstract T getData();
+
+    public NullableResult<T> nullable() {
+        return new NullableResult<T>(getData());
+    }
 }

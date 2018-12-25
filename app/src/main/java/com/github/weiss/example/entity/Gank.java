@@ -1,11 +1,10 @@
 package com.github.weiss.example.entity;
 
-import com.github.weiss.core.entity.BaseHttpResult;
 import com.github.weiss.core.entity.ListEntity;
 import com.github.weiss.core.utils.CollectionUtils;
 import com.github.weiss.core.utils.helper.RxSchedulers;
 import com.github.weiss.example.HttpResult;
-import com.github.weiss.example.api.GankApi;
+import com.github.weiss.example.api.Api;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +42,8 @@ public class Gank extends ListEntity {
 
     @Override
     public Observable<HttpResult<List<Gank>>> getPage(int page) {
-        return GankApi.getInstance().service.getGankData(param.get("gank"), page)
-                .zipWith(GankApi.getInstance().service.getGankData("福利", page),
+        return Api.getInstance().service.getGankData(param.get("gank"), page)
+                .zipWith(Api.getInstance().service.getGankData("福利", page),
                         (BiFunction<HttpResult<List<Gank>>, HttpResult<List<Gank>>, HttpResult<List<Gank>>>) (listHttpResult, listHttpResult2) -> {
                             HttpResult zipItems = new HttpResult();
                             Gank zipItem;

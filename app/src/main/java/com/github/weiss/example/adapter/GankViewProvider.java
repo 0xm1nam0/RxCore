@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.weiss.core.utils.ImageLoaderUtil;
+import com.github.weiss.core.view.ButterKnifeViewHolder;
 import com.github.weiss.example.R;
 import com.github.weiss.example.entity.Gank;
 import com.github.weiss.example.ui.GankDetailsActivity;

@@ -2,13 +2,16 @@ package com.github.weiss.core;
 
 import android.os.Bundle;
 
+import com.github.weiss.core.api.NullableResult;
 import com.github.weiss.core.entity.BaseHttpResult;
 import com.github.weiss.core.utils.ToastUtils;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 
 /**
  * 管理RxJava生命周期，避免内存泄漏
@@ -34,28 +37,24 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
      * @param <T>
      * @return
      */
-    public <T> ObservableTransformer<BaseHttpResult<T>, T> handleResult() {
-        return upstream -> {
-            return upstream.flatMap(result -> {
-                        if (result.isSuccess()) {
-                            if(result.getData() == null){
-                                Observable.empty();
+    public <T> ObservableTransformer<BaseHttpResult<T>, NullableResult<T>> handleResult() {
+        return upstream -> upstream
+                .flatMap((Function<BaseHttpResult<T>, ObservableSource<NullableResult<T>>>) result -> {
+                            if (result.isSuccess()) {
+                                return createData(result.nullable());
+                            } else if (result.isShowToast()) {
+                                ToastUtils.show(result.getMsg());
+                            } else if (!needHandleResult(result)) {
+                                return Observable.error(new Exception(result.getMsg()));
                             }else {
-                                return createData(result.getData());
+                                return Observable.error(new Exception(result.getMsg()));
                             }
-                        } else if (result.isShowToast()) {
-                            ToastUtils.show(result.getMsg());
-                        }else if (!needHandleResult(result)) {
-                            return Observable.error(new Exception(result.getMsg()));
+                            return Observable.empty();
                         }
-                        return Observable.empty();
-                    }
-
-            );
-        };
+                );
     }
 
-    protected  <T> Observable<T> createData(final T t) {
+    protected <T> Observable<NullableResult<T>> createData(final NullableResult<T> t) {
         return Observable.create(subscriber -> {
             try {
                 subscriber.onNext(t);

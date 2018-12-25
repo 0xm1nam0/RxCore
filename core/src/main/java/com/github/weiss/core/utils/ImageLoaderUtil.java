@@ -1,6 +1,7 @@
 package com.github.weiss.core.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +26,10 @@ import java.io.IOException;
  */
 public class ImageLoaderUtil {
 
-    public static final String BASE_URL = "http://47.104.77.17/";
+    public static final String BASE_URL = "http://face.himys.cn";
 
     public static void loadImg(ImageView v, String url) {
-        if(!url.startsWith("http")){
+        if (!url.startsWith("http")) {
             url = BASE_URL + url;
         }
         Glide.with(v.getContext())
@@ -59,10 +60,28 @@ public class ImageLoaderUtil {
                 .into(v);
     }
 
+    public static void loadCircleImg(ImageView v, File file) {
+        Glide.with(v.getContext())
+                .load(file).apply(new RequestOptions()
+                .transform(new GlideCircleTransform(v.getContext())))
+//                .placeholder(R.drawable.head_portrait)
+                .into(v);
+    }
 
     public static void loadCircleImg(ImageView v, String url) {
+        if (!url.startsWith("http")) {
+            url = BASE_URL + url;
+        }
         Glide.with(v.getContext())
                 .load(url).apply(new RequestOptions()
+                .transform(new GlideCircleTransform(v.getContext())))
+//                .placeholder(R.drawable.head_portrait)
+                .into(v);
+    }
+
+    public static void loadCircleImg(ImageView v, Drawable drawable) {
+        Glide.with(v.getContext())
+                .load(drawable).apply(new RequestOptions()
                 .transform(new GlideCircleTransform(v.getContext())))
 //                .placeholder(R.drawable.head_portrait)
                 .into(v);

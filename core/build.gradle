@@ -36,7 +36,7 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestApi('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
@@ -59,8 +59,8 @@ dependencies {
     api 'me.drakeet.multitype:multitype:2.4.1'
     debugApi 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    testApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
     api "com.flyco.systembar:FlycoSystemBar_Lib:1.0.0@aar"
-    testApi 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
