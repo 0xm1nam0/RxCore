@@ -20,12 +20,12 @@ import com.github.weiss.example.ui.PictureActivity;
 import com.github.weiss.example.view.RatioImageView;
 
 import butterknife.BindView;
-import me.drakeet.multitype.ItemViewProvider;
+import me.drakeet.multitype.ItemViewBinder;
 
 /**
  * Created by Weiss on 2017/2/8.
  */
-public class GankViewProvider extends ItemViewProvider<Gank, GankViewProvider.ViewHolder> {
+public class GankViewProvider extends ItemViewBinder<Gank, GankViewProvider.ViewHolder> {
 
     private String type;
 

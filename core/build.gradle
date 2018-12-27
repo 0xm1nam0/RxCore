@@ -16,7 +16,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 3
-        versionName "1.2"
+        versionName "1.2.1"
 
     }
     buildTypes {
@@ -51,7 +51,7 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     api 'io.reactivex.rxjava2:rxandroid:2.0.1'
     api 'in.srain.cube:ultra-ptr:1.0.11'
-    api 'me.drakeet.multitype:multitype:2.4.1'
+    api 'me.drakeet.multitype:multitype:3.4.0'
     debugApi 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"

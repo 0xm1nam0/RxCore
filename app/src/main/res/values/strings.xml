@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Core</string>
+    <string name="app_name">RxCore</string>
     <string name="action_settings">Settings</string>
     <string name="doit">DOIT</string>
     <string name="ask_saving_picture">是否保存图片？</string>

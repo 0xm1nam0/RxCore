@@ -17,6 +17,7 @@ import com.github.weiss.core.BaseRxActivity;
 import com.github.weiss.core.R;
 import com.github.weiss.core.api.NullableResult;
 import com.github.weiss.core.entity.ListEntity;
+import com.github.weiss.core.entity.LoadMore;
 import com.github.weiss.core.utils.CollectionUtils;
 import com.github.weiss.core.utils.LogUtils;
 import com.github.weiss.core.utils.helper.RxException;
@@ -46,13 +47,15 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
     PtrClassicFrameLayout ptrFrame;
 
     private LoadMoreDelegate loadMoreDelegate;
+    private LoadMoreViewBinder loadMoreViewBinder;
+    LoadMore loadMore;
 
     private Context context;
     private MultiTypeAdapter adapter;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     List<ListEntity> listResult = new ArrayList<>();
     private ListEntity model;
-    public int page = 0;
+    public int page = -1;
     public final static int PAGEBEGIN = 0;
     private Map<String, String> param = new HashMap<>();
     private RxListener rxListener;
@@ -116,6 +119,7 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
             public void onRefreshBegin(PtrFrameLayout frame) {
                 page = PAGEBEGIN;
                 request();
+                LogUtils.d("onRefreshBegin:"+page);
             }
 
             @Override
@@ -160,6 +164,7 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
     public void refresh() {
         page = PAGEBEGIN;
         request();
+        LogUtils.d("refresh:"+page);
     }
 
     public void setLayoutManager(RecyclerView.LayoutManager layout) {
@@ -170,10 +175,19 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
         recyclerView.addOnScrollListener(onScrollListener);
     }
 
-    public void setAdapter(MultiTypeAdapter adapter, ListEntity model) {
+    public void setAdapter(MultiTypeAdapter adapter, ListEntity listEntity) {
         this.adapter = adapter;
+        loadMoreViewBinder = new LoadMoreViewBinder();
+        loadMore = new LoadMore();
+        loadMoreViewBinder.setOnLoadMoreClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLoadMore();
+            }
+        });
+        adapter.register(LoadMore.class, new LoadMoreViewBinder());
         recyclerView.setAdapter(adapter);
-        this.model = model;
+        this.model = listEntity;
         ptrFrame.autoRefresh();
     }
 
@@ -209,6 +223,7 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
                                        listResult = results.get();
                                    } else {
                                        listResult.addAll(results.get());
+                                       listResult.remove(loadMore);
                                    }
                                    if (rxListener != null) {
                                        if (CollectionUtils.isEmpty(listResult)) {
@@ -219,14 +234,29 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
                                    }
                                    if (CollectionUtils.isEmpty(results.get())) {
                                        page--;
-                                   } else {
-                                       adapter.setItems(listResult);
-                                       adapter.notifyDataSetChanged();
+                                       if(listResult.contains(loadMore)){
+                                           loadMore.status = LoadMore.STATUS_COMPLETED;
+                                       }else {
+                                           loadMore.status = LoadMore.STATUS_COMPLETED;
+                                           listResult.add(loadMore);
+                                       }
                                    }
+                                   adapter.setItems(listResult);
+                                   adapter.notifyDataSetChanged();
                                }
                            },
                         new RxException<>(e -> {
-                            if(page > PAGEBEGIN) {
+                            if(listResult.contains(loadMore)){
+                                loadMore.status = LoadMore.STATUS_ERROR;
+                                adapter.setItems(listResult);
+                                recyclerView.post(new Runnable() {
+                                    public void run() {
+                                        adapter.notifyDataSetChanged();
+//                                        adapter.notifyItemInserted(listResult.size() - 1);
+                                    }
+                                });
+                            }
+                            if (page > PAGEBEGIN) {
                                 page--;
                             }
                             e.printStackTrace();
@@ -251,13 +281,25 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
 
     @Override
     public boolean isLoading() {
-        return false;
+        return isRequest;
     }
 
     @Override
     public void onLoadMore() {
-        if (!onInterceptLoadMore() && !isRequest) {
+        if (!onInterceptLoadMore() && !isRequest && page >= PAGEBEGIN) {
             page++;
+            if(!listResult.contains(loadMore)){
+                LogUtils.d("onLoadMore:"+page);
+                loadMore.status = LoadMore.STATUS_LOADMORE;
+                listResult.add(loadMore);
+                adapter.setItems(listResult);
+                recyclerView.post(new Runnable() {
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+//                        adapter.notifyItemInserted(listResult.size() - 1);
+                    }
+                });
+            }
             request();
         }
     }
