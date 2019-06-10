@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.bolex.autoEx.AutoEx;
 import com.github.weiss.core.utils.CrashUtils;
 import com.github.weiss.core.utils.SPUtils;
 import com.github.weiss.core.utils.Utils;
@@ -31,6 +32,7 @@ public class BaseApp extends Application {
         SPUtils.init(this);
         Utils.init(this);
         CrashUtils.getInstance().init();
+        AutoEx.apply();
 //        LogUtils2.getBuilder().setTag("MyTag").setLog2FileSwitch(true).create();
     }
 }

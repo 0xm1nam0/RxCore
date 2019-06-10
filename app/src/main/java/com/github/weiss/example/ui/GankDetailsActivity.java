@@ -92,7 +92,6 @@ public class GankDetailsActivity extends BaseActivity {
     public void initView() {
 
         ViewCompat.setTransitionName(mImageView, TRANSIT_PIC);
-
         Intent intent = getIntent();
         if (intent != null)
             parseIntent(intent);

@@ -25,9 +25,6 @@ import butterknife.BindView;
  */
 public class WebActivity extends BaseActivity {
 
-//    @Bind(R.id.circle_progress)
-//    CircleProgressView mCircleProgressView;
-
     @BindView(R.id.progress_bar)
     ProgressBar mBar;
 
@@ -49,11 +46,6 @@ public class WebActivity extends BaseActivity {
         return R.layout.activity_web;
     }
 
-/*
-    @Override
-    public void initPresenter() {
-
-    }*/
 
     @Override
     public void initView() {
