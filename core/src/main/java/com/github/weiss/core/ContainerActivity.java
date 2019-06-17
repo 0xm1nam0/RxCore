@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.github.weiss.core.base.BackHandledFragment;
+import com.github.weiss.core.base.BaseRxActivity;
+import com.github.weiss.core.entity.BaseHttpResult;
 import com.github.weiss.core.utils.helper.BackHandlerHelper;
 
 import java.lang.ref.WeakReference;
@@ -23,7 +25,7 @@ import static android.view.View.generateViewId;
  * 盛装Fragment的一个容器(代理)Activity
  * 普通界面只需要编写Fragment,使用此Activity盛装,这样就不需要每个界面都在AndroidManifest中注册一遍
  */
-public class ContainerActivity extends AppCompatActivity {
+public class ContainerActivity extends BaseRxActivity {
     public static final String FRAGMENT = "fragment";
     public static final String BUNDLE = "bundle";
     protected WeakReference<Fragment> mFragment;
@@ -53,6 +55,21 @@ public class ContainerActivity extends AppCompatActivity {
         Intent intent = new Intent(context, ContainerActivity.class);
         intent.putExtra(ContainerActivity.FRAGMENT, canonicalName);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected boolean needHandleResult(BaseHttpResult result) {
+        return false;
     }
 
     @Override

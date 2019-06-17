@@ -1,10 +1,13 @@
 package com.github.weiss.example.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-import com.github.weiss.core.BaseRxFragment;
+import com.github.weiss.core.ContainerActivity;
+import com.github.weiss.core.base.BackHandledFragment;
+import com.github.weiss.core.base.BaseRxFragment;
 import com.github.weiss.core.view.PtrRecyclerView;
 import com.github.weiss.example.R;
 import com.github.weiss.example.adapter.GankViewProvider;
@@ -16,7 +19,7 @@ import me.drakeet.multitype.MultiTypeAdapter;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends BaseRxFragment {
+public class MainActivityFragment extends BackHandledFragment {
 
     private static String TYPE = "type";
 
@@ -26,6 +29,12 @@ public class MainActivityFragment extends BaseRxFragment {
     private MultiTypeAdapter adapter;
     private String type;
 
+
+    public static void startContainerActivity(Context context,String type) {
+        Bundle args = new Bundle();
+        args.putString(TYPE, type);
+        ContainerActivity.startContainerActivity(context,MainActivityFragment.class.getCanonicalName(),args);
+    }
 
     public static MainActivityFragment newInstance(String type) {
         MainActivityFragment fragment = new MainActivityFragment();

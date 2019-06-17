@@ -1,4 +1,4 @@
-package com.github.weiss.core;
+package com.github.weiss.core.base;
 
 
 /**

@@ -13,8 +13,18 @@
         <activity
             android:name=".ContainerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:hardwareAccelerated="true"
-            android:screenOrientation="portrait" />
+            android:hardwareAccelerated="true" />
+
+        <activity
+            android:name=".crash.DefaultErrorActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:process=":error_activity" />
+
+        <provider
+            android:name=".crash.CaocInitProvider"
+            android:authorities="${applicationId}.customactivityoncrashinitprovider"
+            android:exported="false"
+            android:initOrder="101" />
     </application>
 
 </manifest>

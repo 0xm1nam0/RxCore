@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.github.weiss.core.BaseRxActivity;
+import com.github.weiss.core.base.BaseRxActivity;
 import com.github.weiss.core.R;
 import com.github.weiss.core.api.NullableResult;
 import com.github.weiss.core.entity.ListEntity;

@@ -2,6 +2,7 @@ package com.github.weiss.example.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.weiss.core.ContainerActivity;
 import com.github.weiss.core.utils.ClipboardUtils;
 import com.github.weiss.core.utils.ImageLoaderUtil;
 import com.github.weiss.example.BaseActivity;
@@ -138,6 +140,7 @@ public class GankDetailsActivity extends BaseActivity {
             case R.id.action_copy:
                 ClipboardUtils.copyText(url);
                 SnackbarUtil.showMessage(mCommonWebView, "已复制到剪贴板");
+                MainActivityFragment.startContainerActivity(this,"Android");
                 return true;
         }
 

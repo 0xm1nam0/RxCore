@@ -1,35 +1,29 @@
-package com.github.weiss.core;
+package com.github.weiss.core.base;
 
 import android.os.Bundle;
 
 import com.github.weiss.core.api.NullableResult;
 import com.github.weiss.core.entity.BaseHttpResult;
-import com.github.weiss.core.utils.ToastUtils;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 
 /**
  * 管理RxJava生命周期，避免内存泄漏
- * RxJava处理服务器返回
  * <p>
  * Created by Weiss on 2016/12/23.
  */
 
-public abstract class BaseRxActivity extends BaseCoreActivity {
+public abstract class BaseRxFragment extends BaseFragment {
 
-    protected CompositeDisposable disposables2Stop;// 管理Stop取消订阅者者
-    protected CompositeDisposable disposables2Destroy;// 管理Destroy取消订阅者者
+    private CompositeDisposable disposables2Stop;// 管理Stop取消订阅者者
+    private CompositeDisposable disposables2Destroy;// 管理Destroy取消订阅者者
 
     protected abstract int getLayoutId();
 
     protected abstract void initView();
-
-    protected abstract boolean needHandleResult(BaseHttpResult result);
 
     /**
      * Rx优雅处理服务器返回
@@ -38,31 +32,22 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
      * @return
      */
     public <T> ObservableTransformer<BaseHttpResult<T>, NullableResult<T>> handleResult() {
-        return upstream -> upstream
-                .flatMap((Function<BaseHttpResult<T>, ObservableSource<NullableResult<T>>>) result -> {
-                            if (result.isSuccess()) {
-                                return createData(result.nullable());
-                            } else if (result.isShowToast()) {
-                                ToastUtils.show(result.getMsg());
-                            } else if (!needHandleResult(result)) {
-                                return Observable.error(new Exception(result.getMsg()));
-                            }else {
-                                return Observable.error(new Exception(result.getMsg()));
-                            }
-                            return Observable.empty();
-                        }
-                );
+        BaseRxActivity baseActivity = (BaseRxActivity) getActivity();
+        if (baseActivity != null) {
+            return baseActivity.handleResult();
+        } else {
+            return handleError();
+        }
     }
 
-    protected <T> Observable<NullableResult<T>> createData(final NullableResult<T> t) {
-        return Observable.create(subscriber -> {
-            try {
-                subscriber.onNext(t);
-                subscriber.onComplete();
-            } catch (Exception e) {
-                subscriber.onError(e);
-            }
-        });
+    public <T> ObservableTransformer<BaseHttpResult<T>, NullableResult<T>> handleError() {
+        return upstream -> {
+            return upstream.flatMap(result -> {
+                        return Observable.error(new Exception("getActivity() is null"));
+                    }
+
+            );
+        };
     }
 
     public boolean addRxStop(Disposable disposable) {
@@ -95,23 +80,23 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
         }
     }
 
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if (disposables2Destroy != null) {
             throw new IllegalStateException("onCreate called multiple times");
         }
         disposables2Destroy = new CompositeDisposable();
-        super.onCreate(savedInstanceState);
     }
 
-    protected void onStart() {
+    public void onStart() {
+        super.onStart();
         if (disposables2Stop != null) {
             throw new IllegalStateException("onStart called multiple times");
         }
         disposables2Stop = new CompositeDisposable();
-        super.onStart();
     }
 
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         if (disposables2Stop == null) {
             throw new IllegalStateException("onStop called multiple times or onStart not called");
@@ -120,7 +105,7 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
         disposables2Stop = null;
     }
 
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if (disposables2Destroy == null) {
             throw new IllegalStateException(

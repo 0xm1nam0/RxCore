@@ -1,6 +1,6 @@
 package com.github.weiss.example;
 
-import com.github.weiss.core.BaseRxActivity;
+import com.github.weiss.core.base.BaseRxActivity;
 import com.github.weiss.core.entity.BaseHttpResult;
 import com.github.weiss.core.utils.LogUtils;
 import com.github.weiss.core.utils.ToastUtils;

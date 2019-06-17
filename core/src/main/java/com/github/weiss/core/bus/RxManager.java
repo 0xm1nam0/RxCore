@@ -1,4 +1,4 @@
-package com.github.weiss.core;
+package com.github.weiss.core.bus;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;

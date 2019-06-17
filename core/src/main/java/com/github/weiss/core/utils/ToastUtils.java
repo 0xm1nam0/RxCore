@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.github.weiss.core.BaseApp;
+import com.github.weiss.core.base.BaseApp;
 import com.github.weiss.core.BuildConfig;
 
 /**

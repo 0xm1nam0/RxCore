@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.github.weiss.core.ContainerActivity;
 import com.github.weiss.example.BaseActivity;
 import com.github.weiss.example.R;
 
