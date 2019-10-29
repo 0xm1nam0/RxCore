@@ -10,23 +10,61 @@ import okhttp3.Response;
 
 public class RetryIntercepter implements Interceptor {
 
-    public int maxRetry;//最大重试次数
-    private int retryNum = 0;//假如设置为3次重试的话，则最大可能请求4次（默认1次+3次重试）
+    private int mMaxRetryCount;
+    private long mRetryInterval;
 
-    public RetryIntercepter(int maxRetry) {
-        this.maxRetry = maxRetry;
+    public RetryIntercepter(int maxRetryCount, long retryInterval) {
+        mMaxRetryCount = maxRetryCount;
+        mRetryInterval = retryInterval;
     }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        LogUtils.d("retryNum=" + retryNum);
-        Response response = chain.proceed(request);
-        while (!response.isSuccessful() && retryNum < maxRetry) {
+        Response response = doRequest(chain, request);
+        int retryNum = 0;
+        while(((response==null)||!response.isSuccessful())&&retryNum<=mMaxRetryCount){
+            try {
+                Thread.sleep(mRetryInterval);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             retryNum++;
-            LogUtils.d("retryNum=" + retryNum);
-            response = chain.proceed(request);
+            LogUtils.d("response.code:"+response.code()+"  retryNum:"+retryNum);
+            response = doRequest(chain, request);
+
         }
         return response;
     }
+
+    private Response doRequest(Chain chain, Request request) {
+        try {
+            return chain.proceed(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static class Builder {
+
+        private int mRetryCount = 2;
+        private long mRetryInterval = 500;
+
+        public Builder buildRetryCount(int retryCount){
+            this.mRetryCount = retryCount;
+            return this;
+        }
+
+        public Builder buildRetryInterval(long retryInterval){
+            this.mRetryInterval = retryInterval;
+            return this;
+        }
+
+        public RetryIntercepter build(){
+            return new RetryIntercepter(mRetryCount,mRetryInterval);
+        }
+
+    }
+
 }
