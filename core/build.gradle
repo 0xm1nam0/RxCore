@@ -15,8 +15,8 @@ android {
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.2.1"
+        versionCode 5
+        versionName "1.3.2"
 
     }
     buildTypes {
@@ -54,8 +54,11 @@ dependencies {
     api 'me.drakeet.multitype:multitype:3.4.0'
     debugApi 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    debugApi 'com.github.BolexLiu.AutoEx:AutoEx-Lib:v1.0.8'
-    releaseApi 'com.github.BolexLiu.AutoEx:AutoEx-Lib-No-Op:v1.0.8'
+//    debugApi 'com.github.BolexLiu.AutoEx:AutoEx-Lib:v1.0.8'
+//    releaseApi 'com.github.BolexLiu.AutoEx:AutoEx-Lib-No-Op:v1.0.8'
     api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
     api "com.flyco.systembar:FlycoSystemBar_Lib:1.0.0@aar"
 }
+
+
+apply from: 'publish.gradle'

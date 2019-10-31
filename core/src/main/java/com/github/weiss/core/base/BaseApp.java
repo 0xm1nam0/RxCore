@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-
-import com.bolex.autoEx.AutoEx;
 import com.github.weiss.core.utils.CrashUtils;
 import com.github.weiss.core.utils.SPUtils;
 import com.github.weiss.core.utils.Utils;
@@ -35,7 +33,6 @@ public class BaseApp extends Application {
         SPUtils.init(this);
         Utils.init(this);
         CrashUtils.getInstance().init();
-        AutoEx.apply();
 //        LogUtils2.getBuilder().setTag("MyTag").setLog2FileSwitch(true).create();
 
         //注册监听每个activity的生命周期,便于堆栈式管理
