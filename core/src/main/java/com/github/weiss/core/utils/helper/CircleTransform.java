@@ -1,4 +1,4 @@
-package com.github.weiss.core.utils;
+package com.github.weiss.core.utils.helper;
 
 import android.content.Context;
 import android.graphics.Bitmap;

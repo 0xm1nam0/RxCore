@@ -5,10 +5,10 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import com.github.weiss.core.utils.CrashUtils;
-import com.github.weiss.core.utils.SPUtils;
-import com.github.weiss.core.utils.Utils;
+
+import com.blankj.utilcode.util.CrashUtils;
+import com.blankj.utilcode.util.Utils;
+import com.minamo.utils.SPUtils;
 
 /**
  * Created by Weiss on 2017/1/10.
@@ -32,7 +32,8 @@ public class BaseApp extends Application {
         app = this;
         SPUtils.init(this);
         Utils.init(this);
-        CrashUtils.getInstance().init();
+        CrashUtils.init();
+//        AutoEx.apply();
 //        LogUtils2.getBuilder().setTag("MyTag").setLog2FileSwitch(true).create();
 
         //注册监听每个activity的生命周期,便于堆栈式管理

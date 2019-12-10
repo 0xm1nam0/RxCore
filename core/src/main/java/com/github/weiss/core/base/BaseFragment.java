@@ -57,4 +57,5 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     protected abstract int getLayoutId();
 
     protected abstract void initView();
+
 }

@@ -3,14 +3,11 @@ package com.github.weiss.core.api;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.github.weiss.core.utils.FileUtils;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okio.BufferedSink;
 

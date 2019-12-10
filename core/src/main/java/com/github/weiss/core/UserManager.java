@@ -2,9 +2,9 @@ package com.github.weiss.core;
 
 import android.text.TextUtils;
 
-import com.github.weiss.core.utils.LogUtils;
-import com.github.weiss.core.utils.SPUtils;
 import com.google.gson.Gson;
+import com.minamo.utils.LoggerUtils;
+import com.minamo.utils.SPUtils;
 
 /**
  * author weiss
@@ -38,9 +38,9 @@ public class UserManager<T> {
 
     public void login(T t) {
         if(t == null) {
-            LogUtils.e("UserManager", "Login Model is Null");
+            LoggerUtils.e("UserManager", "Login Model is Null");
         } else if(SPUtils.getBoolean(FILE, IS_LOGIN)) {
-            LogUtils.e("UserManager", "Can't Login Again");
+            LoggerUtils.e("UserManager", "Can't Login Again");
         } else {
             this.mModel = t;
             String user_message = (new Gson()).toJson(t);

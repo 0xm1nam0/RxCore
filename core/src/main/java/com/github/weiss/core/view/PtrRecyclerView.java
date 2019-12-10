@@ -13,14 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.github.weiss.core.base.BaseRxActivity;
 import com.github.weiss.core.R;
+import com.github.weiss.core.base.BaseRxActivity;
 import com.github.weiss.core.api.NullableResult;
 import com.github.weiss.core.entity.ListEntity;
 import com.github.weiss.core.entity.LoadMore;
-import com.github.weiss.core.utils.CollectionUtils;
-import com.github.weiss.core.utils.LogUtils;
 import com.github.weiss.core.utils.helper.RxException;
+import com.minamo.utils.CollectionUtils;
+import com.minamo.utils.LoggerUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -119,7 +119,7 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
             public void onRefreshBegin(PtrFrameLayout frame) {
                 page = PAGEBEGIN;
                 request();
-                LogUtils.d("onRefreshBegin:"+page);
+                LoggerUtils.d("onRefreshBegin:"+page);
             }
 
             @Override
@@ -164,7 +164,7 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
     public void refresh() {
         page = PAGEBEGIN;
         request();
-        LogUtils.d("refresh:"+page);
+        LoggerUtils.d("refresh:"+page);
     }
 
     public void setLayoutManager(RecyclerView.LayoutManager layout) {
@@ -194,7 +194,7 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
     private void request() {
         isRequest = true;
         if (model == null) {
-            LogUtils.e("model", "null");
+            LoggerUtils.e("model", "null");
             return;
         }
         if (page != PAGEBEGIN) {
@@ -289,7 +289,7 @@ public class PtrRecyclerView extends LinearLayout implements LoadMoreDelegate.Lo
         if (!onInterceptLoadMore() && !isRequest && page >= PAGEBEGIN) {
             page++;
             if(!listResult.contains(loadMore)){
-                LogUtils.d("onLoadMore:"+page);
+                LoggerUtils.d("onLoadMore:"+page);
                 loadMore.status = LoadMore.STATUS_LOADMORE;
                 listResult.add(loadMore);
                 adapter.setItems(listResult);

@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.github.weiss.core.utils.ToastUtils;
+
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.ButterKnife;
 
@@ -22,6 +23,9 @@ public abstract class BaseCoreActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        if(savedInstanceState!=null){
+//            String name=savedInstanceState.getString("recover");
+//        }
         //隐藏标题栏以及状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -48,7 +52,7 @@ public abstract class BaseCoreActivity extends AppCompatActivity implements View
     }
 
     public void showToast(String msg) {
-        ToastUtils.show(msg);
+        ToastUtils.showShort(msg);
     }
 
     public void showProgress(String msg) {

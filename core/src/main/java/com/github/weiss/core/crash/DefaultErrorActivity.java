@@ -29,8 +29,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.weiss.core.base.BaseRxActivity;
 import com.github.weiss.core.R;
+import com.github.weiss.core.base.BaseRxActivity;
 import com.github.weiss.core.entity.BaseHttpResult;
 
 

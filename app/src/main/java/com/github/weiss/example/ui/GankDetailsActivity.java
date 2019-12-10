@@ -14,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.github.weiss.core.ContainerActivity;
-import com.github.weiss.core.utils.ClipboardUtils;
 import com.github.weiss.core.utils.ImageLoaderUtil;
 import com.github.weiss.example.BaseActivity;
 import com.github.weiss.example.R;
@@ -24,6 +22,7 @@ import com.github.weiss.example.util.SnackbarUtil;
 import com.github.weiss.example.view.webview.CommonWebChromeClient;
 import com.github.weiss.example.view.webview.CommonWebView;
 import com.github.weiss.example.view.webview.CommonWebViewClient;
+import com.minamo.utils.ClipboardUtils;
 
 import butterknife.BindView;
 

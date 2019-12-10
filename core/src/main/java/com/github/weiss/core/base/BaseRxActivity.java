@@ -2,9 +2,9 @@ package com.github.weiss.core.base;
 
 import android.os.Bundle;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.github.weiss.core.api.NullableResult;
 import com.github.weiss.core.entity.BaseHttpResult;
-import com.github.weiss.core.utils.ToastUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -43,7 +43,7 @@ public abstract class BaseRxActivity extends BaseCoreActivity {
                             if (result.isSuccess()) {
                                 return createData(result.nullable());
                             } else if (result.isShowToast()) {
-                                ToastUtils.show(result.getMsg());
+                                ToastUtils.showShort(result.getMsg());
                             } else if (!needHandleResult(result)) {
                                 return Observable.error(new Exception(result.getMsg()));
                             }else {

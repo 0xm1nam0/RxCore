@@ -1,8 +1,8 @@
 package com.github.weiss.core.utils.helper;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.github.weiss.core.api.NullableResult;
 import com.github.weiss.core.entity.BaseHttpResult;
-import com.github.weiss.core.utils.ToastUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -22,7 +22,7 @@ public class RxHandle {
                             if (result.isSuccess()) {
                                 return createData(result.nullable());
                             } else if (result.isShowToast()) {
-                                ToastUtils.show(result.getMsg());
+                                ToastUtils.showShort(result.getMsg());
                             }else {
                                 return Observable.error(new Exception(result.getMsg()));
                             }

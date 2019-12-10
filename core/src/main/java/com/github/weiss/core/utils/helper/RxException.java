@@ -2,7 +2,8 @@ package com.github.weiss.core.utils.helper;
 
 import android.util.Log;
 
-import com.github.weiss.core.utils.ToastUtils;
+
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -38,15 +39,15 @@ public class RxException<T extends Throwable> implements Consumer<T> {
     public void accept(T t) throws Exception {
         if (t instanceof SocketTimeoutException) {
             Log.e(TAG, "onError: SocketTimeoutException----" + SOCKETTIMEOUTEXCEPTION);
-            ToastUtils.show(SOCKETTIMEOUTEXCEPTION);
+            ToastUtils.showShort(SOCKETTIMEOUTEXCEPTION);
             onError.accept(new Throwable(SOCKETTIMEOUTEXCEPTION));
         } else if (t instanceof ConnectException) {
             Log.e(TAG, "onError: ConnectException-----" + CONNECTEXCEPTION);
-            ToastUtils.show(CONNECTEXCEPTION);
+            ToastUtils.showShort(CONNECTEXCEPTION);
             onError.accept(new Throwable(CONNECTEXCEPTION));
         } else if (t instanceof UnknownHostException) {
             Log.e(TAG, "onError: UnknownHostException-----" + UNKNOWNHOSTEXCEPTION);
-            ToastUtils.show(UNKNOWNHOSTEXCEPTION);
+            ToastUtils.showShort(UNKNOWNHOSTEXCEPTION);
             onError.accept(new Throwable(UNKNOWNHOSTEXCEPTION));
         } else {
             Log.e(TAG, "onError:----" + t.getMessage());

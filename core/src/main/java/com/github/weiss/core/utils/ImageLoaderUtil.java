@@ -60,6 +60,16 @@ public class ImageLoaderUtil {
                 .into(v);
     }
 
+    public static void loadImg(ImageView v, File file) {
+        Glide.with(v.getContext())
+                .load(file).apply(new RequestOptions()
+//                        .asBitmap()
+                .fitCenter()
+//                .placeholder(R.drawable.head_portrait)
+                .diskCacheStrategy(DiskCacheStrategy.ALL))
+                .into(v);
+    }
+
     public static void loadCircleImg(ImageView v, File file) {
         Glide.with(v.getContext())
                 .load(file).apply(new RequestOptions()

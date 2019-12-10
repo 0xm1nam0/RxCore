@@ -1,9 +1,9 @@
 package com.github.weiss.example;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.github.weiss.core.base.BaseRxActivity;
 import com.github.weiss.core.entity.BaseHttpResult;
-import com.github.weiss.core.utils.LogUtils;
-import com.github.weiss.core.utils.ToastUtils;
 
 /**
  * Created by Weiss on 2017/1/17.
@@ -15,7 +15,7 @@ public abstract class BaseActivity extends BaseRxActivity {
     public void tokenInvalid() {
         LogUtils.d("tokenInvalid");
         App.userManager.logout();
-        ToastUtils.show("请安全退出，重新登录账号");
+        ToastUtils.showShort("请安全退出，重新登录账号");
 
     }
 

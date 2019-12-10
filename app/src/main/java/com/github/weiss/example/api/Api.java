@@ -1,8 +1,8 @@
 package com.github.weiss.example.api;
 
 
-import com.github.weiss.core.utils.LogUtils;
-import com.github.weiss.core.utils.NetworkUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.NetworkUtils;
 import com.github.weiss.example.App;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

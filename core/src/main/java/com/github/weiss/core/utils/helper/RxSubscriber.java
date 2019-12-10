@@ -5,8 +5,8 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.github.weiss.core.entity.BaseHttpResult;
-import com.github.weiss.core.utils.ToastUtils;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -86,7 +86,7 @@ public class RxSubscriber<T extends BaseHttpResult> extends AtomicReference<Subs
                 if (t.isSuccess()) {
                     onNext.accept(t);
                 } else if (t.isShowToast()) {
-                    ToastUtils.show(t.getMsg());
+                    ToastUtils.showShort(t.getMsg());
                 } else {
                     Log.e(TAG, "onNext: ----" + t.getMsg());
                     RxJavaPlugins.onError(new Throwable(t.getMsg()));
@@ -125,7 +125,7 @@ public class RxSubscriber<T extends BaseHttpResult> extends AtomicReference<Subs
             RxJavaPlugins.onError(new Throwable(UNKNOWNHOSTEXCEPTION));
         } else {
             Log.e(TAG, "onError:----" + t.getMessage());
-            ToastUtils.show(t.getMessage());
+            ToastUtils.showShort(t.getMessage());
             RxJavaPlugins.onError(t);
         }
         onComplete();

@@ -2,7 +2,8 @@ package com.github.weiss.core.api.interceptor;
 
 import android.content.Context;
 
-import com.github.weiss.core.utils.NetworkUtils;
+
+import com.blankj.utilcode.util.NetworkUtils;
 
 import java.io.IOException;
 
