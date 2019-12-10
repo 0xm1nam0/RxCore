@@ -6,7 +6,7 @@ apply plugin: 'com.jfrog.bintray'
 def gitUrl = 'https://github.com/0xm1nam0/RxCore.git'   // Git仓库的url
 def groupIdDefined = "com.github.weiss"
 def artifactIdDefined = "rxcore"
-def versionDefined = "1.3.2"
+def versionDefined = "1.3.3"
 
 // bintray平台信息配置
 Properties properties = new Properties()
@@ -67,18 +67,19 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
-    failOnError false
-    source = android.sourceSets.main.java.sourceFiles
+    source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
+    // destinationDir = file("../javadoc/")
+    failOnError false
 }
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
-
 artifacts {
-    archives sourcesJar
     archives javadocJar
+    archives sourcesJar
 }
+
 // 执行 ./gradlew clean bintrayUpload

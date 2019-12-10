@@ -38,19 +38,27 @@ allprojects {
     }
 }
 
+allprojects {
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+    }
+}
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
 ext {
-    releaseVersionCode = 1
-    releaseVersionName = '1.0.0'
+    androidVersionCode = 5
+    androidVersionName = '1.3.3'
 
-    androidCompileSdkVersion = 26
+    androidCompileSdkVersion = 28
     androidBuildToolsVersion = '26.1.0'
     androidSupportSdkVersion = '28.0.0'
-    minSdkVersion = 16
-    targetSdkVersion = 24
+    androidMinSdkVersion = 17
+    androidTargetSdkVersion = 28
 
     junitVersion = '4.12'
 
