@@ -1,7 +1,7 @@
 package com.github.weiss.core.view;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +9,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.drakeet.multitype.ItemViewBinder;
 import com.github.weiss.core.R;
 import com.github.weiss.core.entity.LoadMore;
-
-import me.drakeet.multitype.ItemViewBinder;
 
 /**
  * author weiss
@@ -29,13 +28,13 @@ public class LoadMoreViewBinder extends ItemViewBinder<LoadMore, LoadMoreViewBin
 
     @NonNull
     @Override
-    protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
+    public ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
         View root = inflater.inflate(R.layout.item_load_more, parent, false);
         return new ViewHolder(root);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull LoadMore loadMore) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @NonNull LoadMore loadMore) {
         holder.onLoadMoreClickListener = onLoadMoreClickListener;
         if (loadMore.status == LoadMore.STATUS_LOADMORE) {
             holder.moreProgressBar.setVisibility(View.VISIBLE);

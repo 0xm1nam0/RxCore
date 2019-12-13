@@ -1,14 +1,14 @@
 package com.github.weiss.example.view.behavior.helper;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.View;
 
 /**
  * Copy from Android design library
  * <p>
- * Behavior will automatically sets up a {@link android.support.design.widget.ViewOffsetHelper} on a {@link View}.
+ * Behavior will automatically sets up a {@link com.google.android.material.appbar.ViewOffsetHelper} on a {@link View}.
  */
 public class ViewOffsetBehavior<V extends View> extends CoordinatorLayout.Behavior<V> {
 

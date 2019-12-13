@@ -1,6 +1,6 @@
 package com.github.weiss.core.base;
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.github.weiss.core.utils.helper.BackHandlerHelper;
 import com.github.weiss.core.utils.helper.FragmentBackHandler;

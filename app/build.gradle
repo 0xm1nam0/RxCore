@@ -3,13 +3,15 @@ apply plugin: 'com.jakewharton.butterknife'
 //apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 28
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
     defaultConfig {
         applicationId "com.github.weiss.example"
-        minSdkVersion 17
-        targetSdkVersion 28
-        versionCode 3
-        versionName "1.2.1"
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        versionCode globalConfiguration["androidVersionCode"]
+        versionName globalConfiguration["androidVersionName"]
 /*        externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11 -frtti -fexceptions"
@@ -49,12 +51,13 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
     implementation 'com.tencent.bugly:crashreport:2.4.0'
     implementation 'in.srain.cube:ultra-ptr:1.0.11'
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.androidSupportSdkVersion"
-    implementation "com.android.support:design:$rootProject.ext.androidSupportSdkVersion"
-    implementation "com.android.support:recyclerview-v7:$rootProject.ext.androidSupportSdkVersion"
-    implementation "com.android.support:support-v4:$rootProject.ext.androidSupportSdkVersion"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.chrisbanes.photoview:library:1.2.3'
     implementation 'pub.devrel:easypermissions:2.0.0'
+    implementation 'com.drakeet.multitype:multitype:4.1.1'
     implementation project(':core')
     implementation "com.github.0xm1nam0:Common:$rootProject.ext.commonVersion"
 }

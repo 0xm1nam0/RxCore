@@ -3,14 +3,15 @@ package com.github.weiss.example.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.drakeet.multitype.ItemViewBinder;
 import com.github.weiss.core.utils.ImageLoaderUtil;
 import com.github.weiss.core.view.ButterKnifeViewHolder;
 import com.github.weiss.example.R;
@@ -20,7 +21,6 @@ import com.github.weiss.example.ui.PictureActivity;
 import com.github.weiss.example.view.RatioImageView;
 
 import butterknife.BindView;
-import me.drakeet.multitype.ItemViewBinder;
 
 /**
  * Created by Weiss on 2017/2/8.
@@ -35,14 +35,14 @@ public class GankViewProvider extends ItemViewBinder<Gank, GankViewProvider.View
 
     @NonNull
     @Override
-    protected ViewHolder onCreateViewHolder(
+    public ViewHolder onCreateViewHolder(
             @NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
         View root = inflater.inflate(R.layout.item_gank, parent, false);
         return new ViewHolder(root);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull Gank gank) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @NonNull Gank gank) {
         holder.title.setText(gank.desc);
         holder.image.setOriginalSize(50, 50);
         ImageLoaderUtil.loadGifImg(holder.image, gank.imageUrl);

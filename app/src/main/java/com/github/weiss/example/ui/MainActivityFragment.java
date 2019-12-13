@@ -2,19 +2,18 @@ package com.github.weiss.example.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.drakeet.multitype.MultiTypeAdapter;
 import com.github.weiss.core.ContainerActivity;
 import com.github.weiss.core.base.BackHandledFragment;
-import com.github.weiss.core.base.BaseRxFragment;
 import com.github.weiss.core.view.PtrRecyclerView;
 import com.github.weiss.example.R;
 import com.github.weiss.example.adapter.GankViewProvider;
 import com.github.weiss.example.entity.Gank;
 
 import butterknife.BindView;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
  * A placeholder fragment containing a simple view.

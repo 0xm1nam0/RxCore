@@ -21,8 +21,8 @@ package com.github.weiss.example.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AlertDialog;
+import androidx.core.view.ViewCompat;
+import androidx.appcompat.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 

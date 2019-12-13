@@ -1,8 +1,8 @@
 package com.github.weiss.example.view.behavior.uc;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.ViewCompat;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -203,7 +203,7 @@ public class UcNewsHeaderPagerBehavior extends ViewOffsetBehavior {
 
     /**
      * For animation , Why not use {@link android.view.ViewPropertyAnimator } to play animation is of the
-     * other {@link android.support.design.widget.CoordinatorLayout.Behavior} that depend on this could not receiving the correct result of
+     * other {@link CoordinatorLayout.Behavior} that depend on this could not receiving the correct result of
      * {@link View#getTranslationY()} after animation finished for whatever reason that i don't know
      */
     private class FlingRunnable implements Runnable {
