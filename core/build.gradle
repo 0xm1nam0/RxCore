@@ -44,30 +44,31 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
 
-    api "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
-    api 'com.github.bumptech.glide:glide:4.6.1'
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.supportXVersion"
+    implementation "com.google.android.material:material:$rootProject.ext.supportXVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.supportXVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.supportXVersion"
 
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    api "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava2Version"
-    api "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit2Version"
-    api "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit2Version"
-    api "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofit2Version"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava2Version"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit2Version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofit2Version"
 //    api 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    api 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    api 'in.srain.cube:ultra-ptr:1.0.11'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+    implementation 'in.srain.cube:ultra-ptr:1.0.11'
     implementation 'com.drakeet.multitype:multitype:4.1.1'
-    debugApi 'com.squareup.leakcanary:leakcanary-android:1.5'
-    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    implementation "com.flyco.systembar:FlycoSystemBar_Lib:1.0.0@aar"
+    implementation "com.github.0xm1nam0:Common:$rootProject.ext.commonVersion"
 //    debugApi 'com.github.BolexLiu.AutoEx:AutoEx-Lib:v1.0.8'
 //    releaseApi 'com.github.BolexLiu.AutoEx:AutoEx-Lib-No-Op:v1.0.8'
-    api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
-    api "com.flyco.systembar:FlycoSystemBar_Lib:1.0.0@aar"
-    implementation "com.github.0xm1nam0:Common:$rootProject.ext.commonVersion"
 }
 
 

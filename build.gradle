@@ -61,9 +61,11 @@ ext {
 
     junitVersion = '4.12'
 
+    butterknifeVersion = '10.2.0'
+    rxAndroidVersion = '2.1.1'
     rxjava2Version = '2.2.13'
     retrofit2Version = '2.6.2'
     gsonVersion = '2.8.5'
-    butterknifeVersion = '10.2.0'
+    supportXVersion = '1.0.0'
     commonVersion = 'x1.1.0'
 }

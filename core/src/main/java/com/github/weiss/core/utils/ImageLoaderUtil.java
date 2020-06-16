@@ -73,7 +73,7 @@ public class ImageLoaderUtil {
     public static void loadCircleImg(ImageView v, File file) {
         Glide.with(v.getContext())
                 .load(file).apply(new RequestOptions()
-                .transform(new GlideCircleTransform(v.getContext())))
+                .transform(new GlideCircleTransform()))
 //                .placeholder(R.drawable.head_portrait)
                 .into(v);
     }
@@ -84,7 +84,7 @@ public class ImageLoaderUtil {
         }
         Glide.with(v.getContext())
                 .load(url).apply(new RequestOptions()
-                .transform(new GlideCircleTransform(v.getContext())))
+                .transform(new GlideCircleTransform()))
 //                .placeholder(R.drawable.head_portrait)
                 .into(v);
     }
@@ -92,7 +92,7 @@ public class ImageLoaderUtil {
     public static void loadCircleImg(ImageView v, Drawable drawable) {
         Glide.with(v.getContext())
                 .load(drawable).apply(new RequestOptions()
-                .transform(new GlideCircleTransform(v.getContext())))
+                .transform(new GlideCircleTransform()))
 //                .placeholder(R.drawable.head_portrait)
                 .into(v);
     }

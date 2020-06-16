@@ -47,17 +47,33 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
     implementation 'com.tencent.bugly:crashreport:2.4.0'
     implementation 'in.srain.cube:ultra-ptr:1.0.11'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.chrisbanes.photoview:library:1.2.3'
     implementation 'pub.devrel:easypermissions:2.0.0'
+
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.supportXVersion"
+    implementation "com.google.android.material:material:$rootProject.ext.supportXVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.supportXVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.supportXVersion"
+
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava2Version"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit2Version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofit2Version"
+//    api 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+    implementation 'in.srain.cube:ultra-ptr:1.0.11'
     implementation 'com.drakeet.multitype:multitype:4.1.1'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    implementation "com.flyco.systembar:FlycoSystemBar_Lib:1.0.0@aar"
     implementation project(':core')
     implementation "com.github.0xm1nam0:Common:$rootProject.ext.commonVersion"
 }
